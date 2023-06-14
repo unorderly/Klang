@@ -11,10 +11,13 @@ import SwiftData
 @main
 struct WidgetSoundboardApp: App {
 
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
         }
-        .modelContainer(for: Item.self)
+//        .modelContainer(ModelContainer.shared)
     }
+    
+
 }

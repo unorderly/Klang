@@ -7,14 +7,45 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B30338E72A30D06300CEDD47 /* WidgetSoundboardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30338E62A30D06300CEDD47 /* WidgetSoundboardApp.swift */; };
+		B30338E72A30D06300CEDD47 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30338E62A30D06300CEDD47 /* App.swift */; };
 		B30338E92A30D06300CEDD47 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30338E82A30D06300CEDD47 /* ContentView.swift */; };
 		B30338EB2A30D06300CEDD47 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B30338EA2A30D06300CEDD47 /* Assets.xcassets */; };
 		B30338EE2A30D06300CEDD47 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B30338ED2A30D06300CEDD47 /* Preview Assets.xcassets */; };
-		B30338F02A30D06300CEDD47 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30338EF2A30D06300CEDD47 /* Item.swift */; };
+		B30338F02A30D06300CEDD47 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30338EF2A30D06300CEDD47 /* Data.swift */; };
 		B30338FC2A30D06300CEDD47 /* WidgetSoundboardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30338FB2A30D06300CEDD47 /* WidgetSoundboardTests.swift */; };
 		B30339062A30D06400CEDD47 /* WidgetSoundboardUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30339052A30D06400CEDD47 /* WidgetSoundboardUITests.swift */; };
 		B30339082A30D06400CEDD47 /* WidgetSoundboardUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30339072A30D06400CEDD47 /* WidgetSoundboardUITestsLaunchTests.swift */; };
+		B30339152A30D08100CEDD47 /* Intent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30339142A30D08100CEDD47 /* Intent.swift */; };
+		B303393B2A30D34D00CEDD47 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B303391E2A30D25300CEDD47 /* WidgetKit.framework */; };
+		B303393C2A30D34D00CEDD47 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B30339202A30D25300CEDD47 /* SwiftUI.framework */; };
+		B303393F2A30D34D00CEDD47 /* SoundWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B303393E2A30D34D00CEDD47 /* SoundWidgetBundle.swift */; };
+		B30339412A30D34D00CEDD47 /* SoundWidgetLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30339402A30D34D00CEDD47 /* SoundWidgetLiveActivity.swift */; };
+		B30339432A30D34D00CEDD47 /* SoundWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30339422A30D34D00CEDD47 /* SoundWidget.swift */; };
+		B30339452A30D34D00CEDD47 /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30339442A30D34D00CEDD47 /* AppIntent.swift */; };
+		B30339472A30D34D00CEDD47 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B30339462A30D34D00CEDD47 /* Assets.xcassets */; };
+		B303394B2A30D34D00CEDD47 /* SoundWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = B303393A2A30D34D00CEDD47 /* SoundWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		B303394F2A30D39C00CEDD47 /* Intent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30339142A30D08100CEDD47 /* Intent.swift */; };
+		B30339522A32AA5C00CEDD47 /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30339512A32AA5C00CEDD47 /* Board.swift */; };
+		B30339552A32AB3800CEDD47 /* seagulls.caf in Resources */ = {isa = PBXBuildFile; fileRef = B30339532A32AB3800CEDD47 /* seagulls.caf */; };
+		B30339572A32AB3800CEDD47 /* frog.caf in Resources */ = {isa = PBXBuildFile; fileRef = B30339542A32AB3800CEDD47 /* frog.caf */; };
+		B30339592A32AB3E00CEDD47 /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30339512A32AA5C00CEDD47 /* Board.swift */; };
+		B303395C2A341CBE00CEDD47 /* wait.m4a in Resources */ = {isa = PBXBuildFile; fileRef = B303395B2A341CBD00CEDD47 /* wait.m4a */; };
+		B32BF3442A38E7D3005BFA59 /* Alignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32BF3432A38E7D3005BFA59 /* Alignment.swift */; };
+		B32BF3452A38E7D3005BFA59 /* Alignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32BF3432A38E7D3005BFA59 /* Alignment.swift */; };
+		B32BF3462A38F3F1005BFA59 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30338EF2A30D06300CEDD47 /* Data.swift */; };
+		B32BF3482A392A6F005BFA59 /* Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32BF3472A392A6F005BFA59 /* Query.swift */; };
+		B32BF3492A392A6F005BFA59 /* Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32BF3472A392A6F005BFA59 /* Query.swift */; };
+		B32BF35A2A393596005BFA59 /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = B32BF3592A393596005BFA59 /* Defaults */; };
+		B32BF35C2A3935BA005BFA59 /* Defaults in Frameworks */ = {isa = PBXBuildFile; productRef = B32BF35B2A3935BA005BFA59 /* Defaults */; };
+		B32BF35E2A39891F005BFA59 /* AsyncButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32BF35D2A39891E005BFA59 /* AsyncButton.swift */; };
+		B32BF35F2A39891F005BFA59 /* AsyncButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32BF35D2A39891E005BFA59 /* AsyncButton.swift */; };
+		B34040272A398F1800A1D23E /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34040262A398F1800A1D23E /* Color.swift */; };
+		B34040282A398F1800A1D23E /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34040262A398F1800A1D23E /* Color.swift */; };
+		B340402A2A3A1FEC00A1D23E /* horse.m4a in Resources */ = {isa = PBXBuildFile; fileRef = B34040292A3A1FEC00A1D23E /* horse.m4a */; };
+		B340402C2A3A5D7500A1D23E /* wait.m4a in Resources */ = {isa = PBXBuildFile; fileRef = B303395B2A341CBD00CEDD47 /* wait.m4a */; };
+		B340402D2A3A5D7500A1D23E /* frog.caf in Resources */ = {isa = PBXBuildFile; fileRef = B30339542A32AB3800CEDD47 /* frog.caf */; };
+		B340402E2A3A5D7500A1D23E /* seagulls.caf in Resources */ = {isa = PBXBuildFile; fileRef = B30339532A32AB3800CEDD47 /* seagulls.caf */; };
+		B340402F2A3A5D7500A1D23E /* horse.m4a in Resources */ = {isa = PBXBuildFile; fileRef = B34040292A3A1FEC00A1D23E /* horse.m4a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,15 +63,46 @@
 			remoteGlobalIDString = B30338E22A30D06300CEDD47;
 			remoteInfo = WidgetSoundboard;
 		};
+		B30339492A30D34D00CEDD47 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B30338DB2A30D06300CEDD47 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B30339392A30D34D00CEDD47;
+			remoteInfo = SoundWidgetExtension;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B30339342A30D25500CEDD47 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				B303394B2A30D34D00CEDD47 /* SoundWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B303396F2A34248E00CEDD47 /* Embed ExtensionKit Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(EXTENSIONS_FOLDER_PATH)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			name = "Embed ExtensionKit Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		B30338E32A30D06300CEDD47 /* WidgetSoundboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WidgetSoundboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		B30338E62A30D06300CEDD47 /* WidgetSoundboardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetSoundboardApp.swift; sourceTree = "<group>"; };
+		B30338E62A30D06300CEDD47 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		B30338E82A30D06300CEDD47 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		B30338EA2A30D06300CEDD47 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B30338ED2A30D06300CEDD47 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		B30338EF2A30D06300CEDD47 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		B30338EF2A30D06300CEDD47 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		B30338F12A30D06300CEDD47 /* WidgetSoundboard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WidgetSoundboard.entitlements; sourceTree = "<group>"; };
 		B30338F22A30D06300CEDD47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B30338F72A30D06300CEDD47 /* WidgetSoundboardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WidgetSoundboardTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -48,6 +110,26 @@
 		B30339012A30D06400CEDD47 /* WidgetSoundboardUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WidgetSoundboardUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B30339052A30D06400CEDD47 /* WidgetSoundboardUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetSoundboardUITests.swift; sourceTree = "<group>"; };
 		B30339072A30D06400CEDD47 /* WidgetSoundboardUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetSoundboardUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		B30339142A30D08100CEDD47 /* Intent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Intent.swift; sourceTree = "<group>"; };
+		B303391E2A30D25300CEDD47 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		B30339202A30D25300CEDD47 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		B303393A2A30D34D00CEDD47 /* SoundWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SoundWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		B303393E2A30D34D00CEDD47 /* SoundWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundWidgetBundle.swift; sourceTree = "<group>"; };
+		B30339402A30D34D00CEDD47 /* SoundWidgetLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundWidgetLiveActivity.swift; sourceTree = "<group>"; };
+		B30339422A30D34D00CEDD47 /* SoundWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundWidget.swift; sourceTree = "<group>"; };
+		B30339442A30D34D00CEDD47 /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
+		B30339462A30D34D00CEDD47 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B30339482A30D34D00CEDD47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B30339512A32AA5C00CEDD47 /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
+		B30339532A32AB3800CEDD47 /* seagulls.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = seagulls.caf; sourceTree = "<group>"; };
+		B30339542A32AB3800CEDD47 /* frog.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = frog.caf; sourceTree = "<group>"; };
+		B303395A2A32B43600CEDD47 /* SoundWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SoundWidgetExtension.entitlements; sourceTree = "<group>"; };
+		B303395B2A341CBD00CEDD47 /* wait.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = wait.m4a; sourceTree = "<group>"; };
+		B32BF3432A38E7D3005BFA59 /* Alignment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alignment.swift; sourceTree = "<group>"; };
+		B32BF3472A392A6F005BFA59 /* Query.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Query.swift; sourceTree = "<group>"; };
+		B32BF35D2A39891E005BFA59 /* AsyncButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncButton.swift; sourceTree = "<group>"; };
+		B34040262A398F1800A1D23E /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		B34040292A3A1FEC00A1D23E /* horse.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = horse.m4a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +137,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B32BF35A2A393596005BFA59 /* Defaults in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,15 +155,28 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B30339372A30D34D00CEDD47 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B32BF35C2A3935BA005BFA59 /* Defaults in Frameworks */,
+				B303393C2A30D34D00CEDD47 /* SwiftUI.framework in Frameworks */,
+				B303393B2A30D34D00CEDD47 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		B30338DA2A30D06300CEDD47 = {
 			isa = PBXGroup;
 			children = (
+				B303395A2A32B43600CEDD47 /* SoundWidgetExtension.entitlements */,
 				B30338E52A30D06300CEDD47 /* WidgetSoundboard */,
 				B30338FA2A30D06300CEDD47 /* WidgetSoundboardTests */,
 				B30339042A30D06400CEDD47 /* WidgetSoundboardUITests */,
+				B303393D2A30D34D00CEDD47 /* SoundWidget */,
+				B303391D2A30D25300CEDD47 /* Frameworks */,
 				B30338E42A30D06300CEDD47 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -91,6 +187,7 @@
 				B30338E32A30D06300CEDD47 /* WidgetSoundboard.app */,
 				B30338F72A30D06300CEDD47 /* WidgetSoundboardTests.xctest */,
 				B30339012A30D06400CEDD47 /* WidgetSoundboardUITests.xctest */,
+				B303393A2A30D34D00CEDD47 /* SoundWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -98,10 +195,20 @@
 		B30338E52A30D06300CEDD47 /* WidgetSoundboard */ = {
 			isa = PBXGroup;
 			children = (
-				B30338E62A30D06300CEDD47 /* WidgetSoundboardApp.swift */,
+				B30338E62A30D06300CEDD47 /* App.swift */,
 				B30338E82A30D06300CEDD47 /* ContentView.swift */,
+				B30339142A30D08100CEDD47 /* Intent.swift */,
+				B32BF3472A392A6F005BFA59 /* Query.swift */,
 				B30338EA2A30D06300CEDD47 /* Assets.xcassets */,
-				B30338EF2A30D06300CEDD47 /* Item.swift */,
+				B30338EF2A30D06300CEDD47 /* Data.swift */,
+				B30339512A32AA5C00CEDD47 /* Board.swift */,
+				B32BF3432A38E7D3005BFA59 /* Alignment.swift */,
+				B32BF35D2A39891E005BFA59 /* AsyncButton.swift */,
+				B34040262A398F1800A1D23E /* Color.swift */,
+				B30339542A32AB3800CEDD47 /* frog.caf */,
+				B30339532A32AB3800CEDD47 /* seagulls.caf */,
+				B34040292A3A1FEC00A1D23E /* horse.m4a */,
+				B303395B2A341CBD00CEDD47 /* wait.m4a */,
 				B30338F12A30D06300CEDD47 /* WidgetSoundboard.entitlements */,
 				B30338F22A30D06300CEDD47 /* Info.plist */,
 				B30338EC2A30D06300CEDD47 /* Preview Content */,
@@ -134,6 +241,28 @@
 			path = WidgetSoundboardUITests;
 			sourceTree = "<group>";
 		};
+		B303391D2A30D25300CEDD47 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B303391E2A30D25300CEDD47 /* WidgetKit.framework */,
+				B30339202A30D25300CEDD47 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B303393D2A30D34D00CEDD47 /* SoundWidget */ = {
+			isa = PBXGroup;
+			children = (
+				B303393E2A30D34D00CEDD47 /* SoundWidgetBundle.swift */,
+				B30339402A30D34D00CEDD47 /* SoundWidgetLiveActivity.swift */,
+				B30339422A30D34D00CEDD47 /* SoundWidget.swift */,
+				B30339442A30D34D00CEDD47 /* AppIntent.swift */,
+				B30339462A30D34D00CEDD47 /* Assets.xcassets */,
+				B30339482A30D34D00CEDD47 /* Info.plist */,
+			);
+			path = SoundWidget;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -144,12 +273,18 @@
 				B30338DF2A30D06300CEDD47 /* Sources */,
 				B30338E02A30D06300CEDD47 /* Frameworks */,
 				B30338E12A30D06300CEDD47 /* Resources */,
+				B30339342A30D25500CEDD47 /* Embed Foundation Extensions */,
+				B303396F2A34248E00CEDD47 /* Embed ExtensionKit Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				B303394A2A30D34D00CEDD47 /* PBXTargetDependency */,
 			);
 			name = WidgetSoundboard;
+			packageProductDependencies = (
+				B32BF3592A393596005BFA59 /* Defaults */,
+			);
 			productName = WidgetSoundboard;
 			productReference = B30338E32A30D06300CEDD47 /* WidgetSoundboard.app */;
 			productType = "com.apple.product-type.application";
@@ -190,6 +325,26 @@
 			productReference = B30339012A30D06400CEDD47 /* WidgetSoundboardUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		B30339392A30D34D00CEDD47 /* SoundWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B303394C2A30D34D00CEDD47 /* Build configuration list for PBXNativeTarget "SoundWidgetExtension" */;
+			buildPhases = (
+				B30339362A30D34D00CEDD47 /* Sources */,
+				B30339372A30D34D00CEDD47 /* Frameworks */,
+				B30339382A30D34D00CEDD47 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SoundWidgetExtension;
+			packageProductDependencies = (
+				B32BF35B2A3935BA005BFA59 /* Defaults */,
+			);
+			productName = SoundWidgetExtension;
+			productReference = B303393A2A30D34D00CEDD47 /* SoundWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -211,6 +366,9 @@
 						CreatedOnToolsVersion = 15.0;
 						TestTargetID = B30338E22A30D06300CEDD47;
 					};
+					B30339392A30D34D00CEDD47 = {
+						CreatedOnToolsVersion = 15.0;
+					};
 				};
 			};
 			buildConfigurationList = B30338DE2A30D06300CEDD47 /* Build configuration list for PBXProject "WidgetSoundboard" */;
@@ -222,6 +380,9 @@
 				Base,
 			);
 			mainGroup = B30338DA2A30D06300CEDD47;
+			packageReferences = (
+				B32BF3582A393596005BFA59 /* XCRemoteSwiftPackageReference "Defaults" */,
+			);
 			productRefGroup = B30338E42A30D06300CEDD47 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -229,6 +390,7 @@
 				B30338E22A30D06300CEDD47 /* WidgetSoundboard */,
 				B30338F62A30D06300CEDD47 /* WidgetSoundboardTests */,
 				B30339002A30D06400CEDD47 /* WidgetSoundboardUITests */,
+				B30339392A30D34D00CEDD47 /* SoundWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -238,6 +400,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B340402A2A3A1FEC00A1D23E /* horse.m4a in Resources */,
+				B303395C2A341CBE00CEDD47 /* wait.m4a in Resources */,
+				B30339552A32AB3800CEDD47 /* seagulls.caf in Resources */,
+				B30339572A32AB3800CEDD47 /* frog.caf in Resources */,
 				B30338EE2A30D06300CEDD47 /* Preview Assets.xcassets in Resources */,
 				B30338EB2A30D06300CEDD47 /* Assets.xcassets in Resources */,
 			);
@@ -257,6 +423,18 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B30339382A30D34D00CEDD47 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B340402F2A3A5D7500A1D23E /* horse.m4a in Resources */,
+				B340402E2A3A5D7500A1D23E /* seagulls.caf in Resources */,
+				B340402D2A3A5D7500A1D23E /* frog.caf in Resources */,
+				B30339472A30D34D00CEDD47 /* Assets.xcassets in Resources */,
+				B340402C2A3A5D7500A1D23E /* wait.m4a in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -265,8 +443,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				B30338E92A30D06300CEDD47 /* ContentView.swift in Sources */,
-				B30338F02A30D06300CEDD47 /* Item.swift in Sources */,
-				B30338E72A30D06300CEDD47 /* WidgetSoundboardApp.swift in Sources */,
+				B32BF3482A392A6F005BFA59 /* Query.swift in Sources */,
+				B32BF3442A38E7D3005BFA59 /* Alignment.swift in Sources */,
+				B30339152A30D08100CEDD47 /* Intent.swift in Sources */,
+				B30339522A32AA5C00CEDD47 /* Board.swift in Sources */,
+				B30338F02A30D06300CEDD47 /* Data.swift in Sources */,
+				B32BF35E2A39891F005BFA59 /* AsyncButton.swift in Sources */,
+				B30338E72A30D06300CEDD47 /* App.swift in Sources */,
+				B34040272A398F1800A1D23E /* Color.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,6 +471,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B30339362A30D34D00CEDD47 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B30339432A30D34D00CEDD47 /* SoundWidget.swift in Sources */,
+				B32BF3492A392A6F005BFA59 /* Query.swift in Sources */,
+				B34040282A398F1800A1D23E /* Color.swift in Sources */,
+				B303394F2A30D39C00CEDD47 /* Intent.swift in Sources */,
+				B30339592A32AB3E00CEDD47 /* Board.swift in Sources */,
+				B32BF3452A38E7D3005BFA59 /* Alignment.swift in Sources */,
+				B30339452A30D34D00CEDD47 /* AppIntent.swift in Sources */,
+				B32BF35F2A39891F005BFA59 /* AsyncButton.swift in Sources */,
+				B30339412A30D34D00CEDD47 /* SoundWidgetLiveActivity.swift in Sources */,
+				B303393F2A30D34D00CEDD47 /* SoundWidgetBundle.swift in Sources */,
+				B32BF3462A38F3F1005BFA59 /* Data.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -299,6 +501,11 @@
 			isa = PBXTargetDependency;
 			target = B30338E22A30D06300CEDD47 /* WidgetSoundboard */;
 			targetProxy = B30339022A30D06400CEDD47 /* PBXContainerItemProxy */;
+		};
+		B303394A2A30D34D00CEDD47 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B30339392A30D34D00CEDD47 /* SoundWidgetExtension */;
+			targetProxy = B30339492A30D34D00CEDD47 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -425,6 +632,7 @@
 		B303390C2A30D06400CEDD47 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = WidgetSoundboard/WidgetSoundboard.entitlements;
@@ -435,6 +643,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WidgetSoundboard/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Klang;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -456,6 +665,7 @@
 		B303390D2A30D06400CEDD47 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = WidgetSoundboard/WidgetSoundboard.entitlements;
@@ -466,6 +676,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = WidgetSoundboard/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Klang;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -560,6 +771,62 @@
 			};
 			name = Release;
 		};
+		B303394D2A30D34D00CEDD47 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = SoundWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = P459Y32P65;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SoundWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = SoundWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = io.unorderly.WidgetSoundboard.SoundWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B303394E2A30D34D00CEDD47 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = SoundWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = P459Y32P65;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SoundWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = SoundWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = io.unorderly.WidgetSoundboard.SoundWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -599,7 +866,40 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		B303394C2A30D34D00CEDD47 /* Build configuration list for PBXNativeTarget "SoundWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B303394D2A30D34D00CEDD47 /* Debug */,
+				B303394E2A30D34D00CEDD47 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B32BF3582A393596005BFA59 /* XCRemoteSwiftPackageReference "Defaults" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sindresorhus/Defaults";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B32BF3592A393596005BFA59 /* Defaults */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B32BF3582A393596005BFA59 /* XCRemoteSwiftPackageReference "Defaults" */;
+			productName = Defaults;
+		};
+		B32BF35B2A3935BA005BFA59 /* Defaults */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B32BF3582A393596005BFA59 /* XCRemoteSwiftPackageReference "Defaults" */;
+			productName = Defaults;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B30338DB2A30D06300CEDD47 /* Project object */;
 }
