@@ -125,6 +125,7 @@
 		B30339542A32AB3800CEDD47 /* frog.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = frog.caf; sourceTree = "<group>"; };
 		B303395A2A32B43600CEDD47 /* SoundWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SoundWidgetExtension.entitlements; sourceTree = "<group>"; };
 		B303395B2A341CBD00CEDD47 /* wait.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = wait.m4a; sourceTree = "<group>"; };
+		B32193292A3D804B0050B011 /* WhatToTest.en-US.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "WhatToTest.en-US.txt"; sourceTree = "<group>"; };
 		B32BF3432A38E7D3005BFA59 /* Alignment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alignment.swift; sourceTree = "<group>"; };
 		B32BF3472A392A6F005BFA59 /* Query.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Query.swift; sourceTree = "<group>"; };
 		B32BF35D2A39891E005BFA59 /* AsyncButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncButton.swift; sourceTree = "<group>"; };
@@ -172,9 +173,10 @@
 			isa = PBXGroup;
 			children = (
 				B30338E52A30D06300CEDD47 /* WidgetSoundboard */,
+				B303393D2A30D34D00CEDD47 /* SoundWidget */,
 				B30338FA2A30D06300CEDD47 /* WidgetSoundboardTests */,
 				B30339042A30D06400CEDD47 /* WidgetSoundboardUITests */,
-				B303393D2A30D34D00CEDD47 /* SoundWidget */,
+				B32193282A3D802F0050B011 /* TestFlight */,
 				B303391D2A30D25300CEDD47 /* Frameworks */,
 				B30338E42A30D06300CEDD47 /* Products */,
 			);
@@ -261,6 +263,14 @@
 				B30339482A30D34D00CEDD47 /* Info.plist */,
 			);
 			path = SoundWidget;
+			sourceTree = "<group>";
+		};
+		B32193282A3D802F0050B011 /* TestFlight */ = {
+			isa = PBXGroup;
+			children = (
+				B32193292A3D804B0050B011 /* WhatToTest.en-US.txt */,
+			);
+			path = TestFlight;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
