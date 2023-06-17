@@ -31,7 +31,6 @@ extension Defaults.Keys {
     }
 }
 
-//@Model
 struct Sound: Codable, Defaults.Serializable, Identifiable {
     var id: UUID
     var title: String
@@ -68,20 +67,3 @@ struct Sound: Codable, Defaults.Serializable, Identifiable {
         .init(id: UUID(uuidString: "EDE81226-88E1-4321-BC89-855B005D5063")!, title: "Wait", symbol: "🚦", color: .yellow, file: "wait.m4a"),
     ]
 }
-
-
-//extension ModelContainer {
-//    static let shared: ModelContainer = {
-//        let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.io.unorderly.soundboard")!
-//            .appending(component: "Sounds.store")
-//        let config = ModelConfiguration(
-//            schema: Schema([
-//                Sound.self
-//            ]),
-//            url: url
-//            //           cloudKitContainerIdentifier: "com.example.trips"
-//        )
-//        
-//        return try! ModelContainer(for: Sound.self, config)
-//    }()
-//}

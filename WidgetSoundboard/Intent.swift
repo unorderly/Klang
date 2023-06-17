@@ -31,9 +31,9 @@ struct SoundEntity: AppEntity, Identifiable, Hashable {
     
     @Property(title: "Symbol")
     var symbol: String
-//    
-//    @Property(title: "Color")
-//    var color: Color
+
+    @Property(title: "Color")
+    var color: String
     
     @Property(title: "Sound")
     var file: IntentFile
@@ -42,12 +42,18 @@ struct SoundEntity: AppEntity, Identifiable, Hashable {
         self.id = id
         self.title = title
         self.symbol = symbol
-//        self.color = color
+        self.color = color.hex()
         self.file = IntentFile(fileURL: url)
     }
     
     init(sound: Sound) {
-        self.init(id: sound.id, title: sound.title, symbol: sound.symbol, color: sound.color, url: sound.url)
+        self.init(
+            id: sound.id,
+            title: sound.title,
+            symbol: sound.symbol,
+            color: sound.color,
+            url: sound.url
+        )
     }
     
     static func == (lhs: SoundEntity, rhs: SoundEntity) -> Bool {
@@ -59,8 +65,6 @@ struct SoundEntity: AppEntity, Identifiable, Hashable {
         hasher.combine(self.id)
     }
 }
-
-
 
 struct SoundIntent: AudioStartingIntent {
     static var title: LocalizedStringResource = "Play Sound"

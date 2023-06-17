@@ -76,7 +76,7 @@ struct SoundWidgetEntryView : View {
                         }
                         .buttonBorderShape(.roundedRectangle)
                         .buttonStyle(.bordered)
-                        //                .tint(.red)
+                        .tint(Color(hex: sound.color) ?? .red)
                     }
                 }
             }

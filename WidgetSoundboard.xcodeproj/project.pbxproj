@@ -25,10 +25,8 @@
 		B30339472A30D34D00CEDD47 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B30339462A30D34D00CEDD47 /* Assets.xcassets */; };
 		B303394B2A30D34D00CEDD47 /* SoundWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = B303393A2A30D34D00CEDD47 /* SoundWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B303394F2A30D39C00CEDD47 /* Intent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30339142A30D08100CEDD47 /* Intent.swift */; };
-		B30339522A32AA5C00CEDD47 /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30339512A32AA5C00CEDD47 /* Board.swift */; };
 		B30339552A32AB3800CEDD47 /* seagulls.caf in Resources */ = {isa = PBXBuildFile; fileRef = B30339532A32AB3800CEDD47 /* seagulls.caf */; };
 		B30339572A32AB3800CEDD47 /* frog.caf in Resources */ = {isa = PBXBuildFile; fileRef = B30339542A32AB3800CEDD47 /* frog.caf */; };
-		B30339592A32AB3E00CEDD47 /* Board.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30339512A32AA5C00CEDD47 /* Board.swift */; };
 		B321932B2A3D86450050B011 /* wait.m4a in Resources */ = {isa = PBXBuildFile; fileRef = B321932A2A3D86450050B011 /* wait.m4a */; };
 		B321932C2A3D86450050B011 /* wait.m4a in Resources */ = {isa = PBXBuildFile; fileRef = B321932A2A3D86450050B011 /* wait.m4a */; };
 		B32BF3442A38E7D3005BFA59 /* Alignment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32BF3432A38E7D3005BFA59 /* Alignment.swift */; };
@@ -120,7 +118,6 @@
 		B30339442A30D34D00CEDD47 /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
 		B30339462A30D34D00CEDD47 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B30339482A30D34D00CEDD47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B30339512A32AA5C00CEDD47 /* Board.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Board.swift; sourceTree = "<group>"; };
 		B30339532A32AB3800CEDD47 /* seagulls.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = seagulls.caf; sourceTree = "<group>"; };
 		B30339542A32AB3800CEDD47 /* frog.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = frog.caf; sourceTree = "<group>"; };
 		B303395A2A32B43600CEDD47 /* SoundWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SoundWidgetExtension.entitlements; sourceTree = "<group>"; };
@@ -198,9 +195,7 @@
 				B30338E82A30D06300CEDD47 /* ContentView.swift */,
 				B30339142A30D08100CEDD47 /* Intent.swift */,
 				B32BF3472A392A6F005BFA59 /* Query.swift */,
-				B30338EA2A30D06300CEDD47 /* Assets.xcassets */,
 				B30338EF2A30D06300CEDD47 /* Data.swift */,
-				B30339512A32AA5C00CEDD47 /* Board.swift */,
 				B32BF3432A38E7D3005BFA59 /* Alignment.swift */,
 				B32BF35D2A39891E005BFA59 /* AsyncButton.swift */,
 				B34040262A398F1800A1D23E /* Color.swift */,
@@ -208,6 +203,7 @@
 				B30339532A32AB3800CEDD47 /* seagulls.caf */,
 				B34040292A3A1FEC00A1D23E /* horse.m4a */,
 				B321932A2A3D86450050B011 /* wait.m4a */,
+				B30338EA2A30D06300CEDD47 /* Assets.xcassets */,
 				B30338F12A30D06300CEDD47 /* WidgetSoundboard.entitlements */,
 				B30338F22A30D06300CEDD47 /* Info.plist */,
 				B30338EC2A30D06300CEDD47 /* Preview Content */,
@@ -388,9 +384,9 @@
 			projectRoot = "";
 			targets = (
 				B30338E22A30D06300CEDD47 /* WidgetSoundboard */,
+				B30339392A30D34D00CEDD47 /* SoundWidgetExtension */,
 				B30338F62A30D06300CEDD47 /* WidgetSoundboardTests */,
 				B30339002A30D06400CEDD47 /* WidgetSoundboardUITests */,
-				B30339392A30D34D00CEDD47 /* SoundWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -446,7 +442,6 @@
 				B32BF3482A392A6F005BFA59 /* Query.swift in Sources */,
 				B32BF3442A38E7D3005BFA59 /* Alignment.swift in Sources */,
 				B30339152A30D08100CEDD47 /* Intent.swift in Sources */,
-				B30339522A32AA5C00CEDD47 /* Board.swift in Sources */,
 				B30338F02A30D06300CEDD47 /* Data.swift in Sources */,
 				B32BF35E2A39891F005BFA59 /* AsyncButton.swift in Sources */,
 				B30338E72A30D06300CEDD47 /* App.swift in Sources */,
@@ -479,7 +474,6 @@
 				B32BF3492A392A6F005BFA59 /* Query.swift in Sources */,
 				B34040282A398F1800A1D23E /* Color.swift in Sources */,
 				B303394F2A30D39C00CEDD47 /* Intent.swift in Sources */,
-				B30339592A32AB3E00CEDD47 /* Board.swift in Sources */,
 				B32BF3452A38E7D3005BFA59 /* Alignment.swift in Sources */,
 				B30339452A30D34D00CEDD47 /* AppIntent.swift in Sources */,
 				B32BF35F2A39891F005BFA59 /* AsyncButton.swift in Sources */,
