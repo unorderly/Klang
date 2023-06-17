@@ -14,6 +14,15 @@ struct ConfigurationAppIntent: WidgetConfigurationIntent {
 
     @Parameter(title: "Sounds",
                description: "Pick the sounds for this widgets. If there is not enough room for all sounds, only the first will be displayed.",
-               default: [])
+               default: [],
+               size: [
+                .systemSmall: .init(min: 0, max: 4),
+                .systemMedium: .init(min: 0, max: 8),
+                .systemLarge: .init(min: 0, max: 16),
+                .systemExtraLarge: .init(min: 0, max: 32),
+                .accessoryCircular: .init(min: 0, max: 1),
+                .accessoryRectangular: .init(min: 0, max: 2),
+                .accessoryInline: .init(min: 0, max: 0)
+               ])
     var sounds: [SoundEntity]
 }
