@@ -89,13 +89,19 @@ struct EditorView: View {
                         }
                         dismiss()
                     }) {
-                        if self.isExisting {
-                            Text("Update Sound")
-                        } else {
-                            Text("Add Sound")
+                        Group {
+                            if self.isExisting {
+                                Text("Update Sound")
+                            } else {
+                                Text("Add Sound")
+                            }
                         }
+                        .aligned(to: .horizontal)
                     }
+                    .foregroundStyle(.background)
+                    .font(.headline)
                 }
+                .listRowBackground(Color.accentColor)
             }
         
         }
