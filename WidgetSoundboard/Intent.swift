@@ -11,8 +11,7 @@ import AudioToolbox
 import WidgetKit
 import MediaPlayer
 import SwiftUI
-
-
+import Defaults
 
 struct SoundEntity: AppEntity, Identifiable, Hashable {
 
@@ -65,6 +64,26 @@ struct SoundEntity: AppEntity, Identifiable, Hashable {
         hasher.combine(self.id)
     }
 }
+
+struct SoundQuery: EntityStringQuery {
+    func entities(for identifiers: [SoundEntity.ID]) async throws -> [SoundEntity] {
+        return Defaults[.sounds]
+            .filter({ identifiers.contains($0.id) })
+            .map({ SoundEntity(sound: $0) })
+    }
+    
+    func entities(matching string: String) async throws -> [SoundEntity] {
+        return Defaults[.sounds]
+            .filter({ $0.title.contains(string) })
+            .map({ SoundEntity(sound: $0) })
+    }
+    
+    func suggestedEntities() async throws -> [SoundEntity] {
+        Defaults[.sounds]
+            .map({ SoundEntity(sound: $0) })
+    }
+}
+
 
 struct SoundIntent: AudioStartingIntent {
     static var title: LocalizedStringResource = "Play Sound"
