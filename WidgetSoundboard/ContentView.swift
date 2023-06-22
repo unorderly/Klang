@@ -27,7 +27,7 @@ struct ContentView: View {
                         self.editingSound = sound
                     }) {
                         LabeledContent(content: {
-                            Button(intent: SoundIntent(sound: .init(sound: sound))) {
+                            Button(intent: SoundIntent(sound: .init(sound: sound), isFullBlast: false)) {
                                 Image(systemName: "speaker.wave.3.fill")
                             }
                         }, label: {

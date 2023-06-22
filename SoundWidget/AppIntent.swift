@@ -25,4 +25,10 @@ struct ConfigurationAppIntent: WidgetConfigurationIntent {
                 .accessoryInline: .init(min: 0, max: 0)
                ])
     var sounds: [SoundEntity]
+    
+    
+    @Parameter(title: "Full Blast Mode",
+               description: "If enabled, the sound will set to full volumn before playing the sound. To protect your ears, this only happens when no headphones/speakers are connected (hopefully).",
+               default: false)
+    var isFullBlast: Bool
 }

@@ -67,7 +67,7 @@ struct SoundWidgetEntryView : View {
                     GridItem(.adaptive(minimum: size))
                 ]) {
                     ForEach(Array(entry.configuration.sounds.prefix(maxCount))) { sound in
-                        Button(intent: SoundIntent(sound: sound)) {
+                        Button(intent: SoundIntent(sound: sound, isFullBlast: entry.configuration.isFullBlast)) {
                             Text(sound.symbol)
                                 .minimumScaleFactor(0.5)
                                 .font(.title2)

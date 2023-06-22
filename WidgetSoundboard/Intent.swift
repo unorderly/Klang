@@ -93,8 +93,12 @@ struct SoundIntent: AudioStartingIntent {
     @Parameter(title: "Sound")
     var sound: SoundEntity
     
-    init(sound: SoundEntity) {
+    @Parameter(title: "Full Blast Mode")
+    var isFullBlast: Bool
+    
+    init(sound: SoundEntity, isFullBlast: Bool) {
         self.sound = sound
+        self.isFullBlast = isFullBlast
     }
     
     init() {
@@ -102,7 +106,6 @@ struct SoundIntent: AudioStartingIntent {
     }
     
     func perform() async throws -> some IntentResult {
-        //        await MPVolumeView.setVolume(1)
         print("Start playing \(sound.title)")
         
         let player = try AudioPlayer(url: sound.file.fileURL!)
@@ -114,6 +117,10 @@ struct SoundIntent: AudioStartingIntent {
             print("Activated session for \(sound.title)")
         } catch {
             print("Activation error:", error)
+        }
+        
+        if self.isFullBlast && player.isOnSpeaker {
+            await MPVolumeView.setVolume(1)
         }
         
         
@@ -143,12 +150,16 @@ class AudioPlayer: NSObject, AVAudioPlayerDelegate {
         self.player.delegate = self
     }
     func activate() throws {
-        try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [.mixWithOthers, .allowAirPlay, .duckOthers])
+        try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [.mixWithOthers, .duckOthers])
         try AVAudioSession.sharedInstance().setActive(true)
     }
     
     func deactivate() throws {
         try AVAudioSession.sharedInstance().setActive(false)
+    }
+    
+    var isOnSpeaker: Bool {
+        AVAudioSession.sharedInstance().currentRoute.outputs.allSatisfy({ $0.portType == .builtInSpeaker })
     }
     
     func play() async {
