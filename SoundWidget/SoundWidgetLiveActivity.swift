@@ -72,9 +72,9 @@ extension SoundWidgetAttributes.ContentState {
      }
 }
 
-#Preview("Notification", as: .content, using: SoundWidgetAttributes.preview) {
-   SoundWidgetLiveActivity()
-} contentStates: {
-    SoundWidgetAttributes.ContentState.smiley
-    SoundWidgetAttributes.ContentState.starEyes
-}
+//#Preview("Notification", as: .content, using: SoundWidgetAttributes.preview) {
+//   SoundWidgetLiveActivity()
+//} contentStates: {
+//    SoundWidgetAttributes.ContentState.smiley
+//    SoundWidgetAttributes.ContentState.starEyes
+//}

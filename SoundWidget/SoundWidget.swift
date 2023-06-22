@@ -114,9 +114,9 @@ extension ConfigurationAppIntent {
     }
 }
 
-#Preview(as: .systemSmall) {
-    SoundWidget()
-} timeline: {
-    SimpleEntry(date: .now, configuration: .smiley)
-    SimpleEntry(date: .now, configuration: .starEyes)
-}
+//#Preview(as: .systemSmall) {
+//    SoundWidget()
+//} timeline: {
+//    SimpleEntry(date: .now, configuration: .smiley)
+//    SimpleEntry(date: .now, configuration: .starEyes)
+//}

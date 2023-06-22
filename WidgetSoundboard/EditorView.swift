@@ -147,21 +147,21 @@ struct EditorView: View {
 }
 
 
-#Preview("Edit") {
-    EditorView(
-        sound: .init(
-            id: .init(uuidString: "3D82D8A0-9BA6-4014-B49D-393EB5989CDC")!,
-            title: "Test123",
-            symbol: "🚦",
-            color: .red,
-            url: Bundle.main.url(
-                    forResource: "wait",
-                    withExtension: "m4a"
-                )!
-        )
-    )
-}
-
-#Preview("New") {
-    EditorView()
-}
+//#Preview("Edit") {
+//    EditorView(
+//        sound: .init(
+//            id: .init(uuidString: "3D82D8A0-9BA6-4014-B49D-393EB5989CDC")!,
+//            title: "Test123",
+//            symbol: "🚦",
+//            color: .red,
+//            url: Bundle.main.url(
+//                    forResource: "wait",
+//                    withExtension: "m4a"
+//                )!
+//        )
+//    )
+//}
+//
+//#Preview("New") {
+//    EditorView()
+//}
