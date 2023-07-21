@@ -64,7 +64,7 @@ struct SoundWidgetEntryView : View {
                 Text("Tap and hold the widget to add sounds")
             } else {
                 LazyVGrid(columns: [
-                    GridItem(.adaptive(minimum: size))
+                    GridItem(.adaptive(minimum: size), alignment: .topLeading)
                 ]) {
                     ForEach(Array(entry.configuration.sounds.prefix(maxCount))) { sound in
                         Button(intent: SoundIntent(sound: sound, isFullBlast: entry.configuration.isFullBlast)) {
@@ -73,12 +73,15 @@ struct SoundWidgetEntryView : View {
                                 .font(.title2)
                                 .aligned(to: .all)
                                 .padding(4)
+                                .frame(maxHeight: size)
                         }
                         .buttonBorderShape(.roundedRectangle)
                         .buttonStyle(.bordered)
                         .tint(Color(hex: sound.color) ?? .red)
                     }
                 }
+//                .background(Color.red)
+                .frame(maxHeight: .infinity, alignment: .top)
             }
         }
         .containerBackground(.fill, for: .widget)
@@ -114,9 +117,16 @@ extension ConfigurationAppIntent {
     }
 }
 
-//#Preview(as: .systemSmall) {
-//    SoundWidget()
-//} timeline: {
-//    SimpleEntry(date: .now, configuration: .smiley)
-//    SimpleEntry(date: .now, configuration: .starEyes)
-//}
+#Preview(as: .systemSmall) {
+    SoundWidget()
+} timeline: {
+    SimpleEntry(date: .now, configuration: .smiley)
+    SimpleEntry(date: .now, configuration: .starEyes)
+}
+
+#Preview(as: .systemMedium) {
+    SoundWidget()
+} timeline: {
+    SimpleEntry(date: .now, configuration: .smiley)
+    SimpleEntry(date: .now, configuration: .starEyes)
+}

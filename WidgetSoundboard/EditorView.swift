@@ -20,6 +20,8 @@ struct EditorView: View {
     
     @State var isExisting = false
     
+    @State var audioLevel: Double = 0
+    
     @Environment(\.dismiss) var dismiss
     
     init(title: String = "",
@@ -61,14 +63,14 @@ struct EditorView: View {
             }
             
             Section {
+                SoundEditorView(recorder: .init(id: self.id, url: $file, audioLevel: $audioLevel))
+                
                 importButton
                 
                 if let file {
                     AsyncButton("Play Sound") {
                         let player = try AudioPlayer(url: file)
-                        try player.activate()
-                        await player.play()
-                        try player.deactivate()
+                        try await player.playOnQueue()
                         
                     }
                 }
@@ -103,7 +105,6 @@ struct EditorView: View {
                 }
                 .listRowBackground(Color.accentColor)
             }
-        
         }
     }
     

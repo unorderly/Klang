@@ -62,16 +62,16 @@ public struct AsyncButton<Content: View>: View {
         }, label: {
             self.label(isLoading)
         })
-        .onChange(of: self.isRunning == true && !self.isLoading, perform: {
-            if $0 {
+        .onChange(of: self.isRunning == true && !self.isLoading, initial: true) { _, value in
+            if value {
                 self.performAction()
             }
-        })
-        .onChange(of: self.isRunning == false && self.isLoading, perform: {
-            if $0 {
+        }
+        .onChange(of: self.isRunning == false && self.isLoading, initial: true) { _, value in
+            if value {
                 self.task?.cancel()
             }
-        })
+        }
         .disabled(self.isLoading)
         .alert(error: $error, title: Text("Unexpected error"))
     }

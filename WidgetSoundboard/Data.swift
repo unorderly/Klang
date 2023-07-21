@@ -31,7 +31,7 @@ extension Defaults.Keys {
     }
 }
 
-struct Sound: Codable, Defaults.Serializable, Identifiable {
+struct Sound: Codable, Defaults.Serializable, Identifiable, Hashable {
     var id: UUID
     var title: String
     var symbol: String

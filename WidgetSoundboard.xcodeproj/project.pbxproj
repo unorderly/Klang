@@ -43,6 +43,9 @@
 		B340402D2A3A5D7500A1D23E /* frog.caf in Resources */ = {isa = PBXBuildFile; fileRef = B30339542A32AB3800CEDD47 /* frog.caf */; };
 		B340402E2A3A5D7500A1D23E /* seagulls.caf in Resources */ = {isa = PBXBuildFile; fileRef = B30339532A32AB3800CEDD47 /* seagulls.caf */; };
 		B340402F2A3A5D7500A1D23E /* horse.m4a in Resources */ = {isa = PBXBuildFile; fileRef = B34040292A3A1FEC00A1D23E /* horse.m4a */; };
+		B3867FCF2A6B1E4800A6263D /* RecordingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3867FCE2A6B1E4800A6263D /* RecordingView.swift */; };
+		B3DD59DB2A6B046400314F4E /* SwiftUIReorderableForEach in Frameworks */ = {isa = PBXBuildFile; productRef = B3DD59DA2A6B046400314F4E /* SwiftUIReorderableForEach */; };
+		B3DD59DD2A6B070500314F4E /* SoundEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DD59DC2A6B070500314F4E /* SoundEditorView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -126,6 +129,8 @@
 		B32BF35D2A39891E005BFA59 /* AsyncButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncButton.swift; sourceTree = "<group>"; };
 		B34040262A398F1800A1D23E /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		B34040292A3A1FEC00A1D23E /* horse.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = horse.m4a; sourceTree = "<group>"; };
+		B3867FCE2A6B1E4800A6263D /* RecordingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingView.swift; sourceTree = "<group>"; };
+		B3DD59DC2A6B070500314F4E /* SoundEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundEditorView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +139,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B32BF35A2A393596005BFA59 /* Defaults in Frameworks */,
+				B3DD59DB2A6B046400314F4E /* SwiftUIReorderableForEach in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -193,6 +199,8 @@
 				B30338E62A30D06300CEDD47 /* App.swift */,
 				B30338E82A30D06300CEDD47 /* ContentView.swift */,
 				B321932F2A3FAD0C0050B011 /* EditorView.swift */,
+				B3DD59DC2A6B070500314F4E /* SoundEditorView.swift */,
+				B3867FCE2A6B1E4800A6263D /* RecordingView.swift */,
 				B30339142A30D08100CEDD47 /* Intent.swift */,
 				B30338EF2A30D06300CEDD47 /* Data.swift */,
 				B321932E2A3FACAD0050B011 /* Helpers */,
@@ -295,6 +303,7 @@
 			name = WidgetSoundboard;
 			packageProductDependencies = (
 				B32BF3592A393596005BFA59 /* Defaults */,
+				B3DD59DA2A6B046400314F4E /* SwiftUIReorderableForEach */,
 			);
 			productName = WidgetSoundboard;
 			productReference = B30338E32A30D06300CEDD47 /* WidgetSoundboard.app */;
@@ -393,6 +402,7 @@
 			mainGroup = B30338DA2A30D06300CEDD47;
 			packageReferences = (
 				B32BF3582A393596005BFA59 /* XCRemoteSwiftPackageReference "Defaults" */,
+				B3DD59D92A6B046400314F4E /* XCRemoteSwiftPackageReference "swiftui-reorderable-foreach" */,
 			);
 			productRefGroup = B30338E42A30D06300CEDD47 /* Products */;
 			projectDirPath = "";
@@ -459,6 +469,8 @@
 				B30338F02A30D06300CEDD47 /* Data.swift in Sources */,
 				B32BF35E2A39891F005BFA59 /* AsyncButton.swift in Sources */,
 				B32193302A3FAD0C0050B011 /* EditorView.swift in Sources */,
+				B3867FCF2A6B1E4800A6263D /* RecordingView.swift in Sources */,
+				B3DD59DD2A6B070500314F4E /* SoundEditorView.swift in Sources */,
 				B30338E72A30D06300CEDD47 /* App.swift in Sources */,
 				B34040272A398F1800A1D23E /* Color.swift in Sources */,
 			);
@@ -644,6 +656,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = WidgetSoundboard/WidgetSoundboard.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"WidgetSoundboard/Preview Content\"";
@@ -665,6 +678,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.unorderly.klang;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -678,6 +692,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = WidgetSoundboard/WidgetSoundboard.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"WidgetSoundboard/Preview Content\"";
@@ -699,6 +714,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.unorderly.klang;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -896,6 +912,14 @@
 				kind = branch;
 			};
 		};
+		B3DD59D92A6B046400314F4E /* XCRemoteSwiftPackageReference "swiftui-reorderable-foreach" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/globulus/swiftui-reorderable-foreach";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -908,6 +932,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B32BF3582A393596005BFA59 /* XCRemoteSwiftPackageReference "Defaults" */;
 			productName = Defaults;
+		};
+		B3DD59DA2A6B046400314F4E /* SwiftUIReorderableForEach */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B3DD59D92A6B046400314F4E /* XCRemoteSwiftPackageReference "swiftui-reorderable-foreach" */;
+			productName = SwiftUIReorderableForEach;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
