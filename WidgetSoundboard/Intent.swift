@@ -175,10 +175,17 @@ struct SoundIntent: AudioStartingIntent {
     }
 }
 
-
+@Observable
 final class AudioPlayer: NSObject, AVAudioPlayerDelegate {
     let player: AVAudioPlayer
+    
+    var isPlaying: Bool = false
+    
+    var progress: Double = 0
+    
     private var continuation: CheckedContinuation<Void, Never>?
+    private var playingTask: Task<Void, Never>?
+    private var progressTask: Task<Void, Never>?
     
     init(url: URL) throws {
         self.player = try AVAudioPlayer(contentsOf: url)
@@ -208,10 +215,40 @@ final class AudioPlayer: NSObject, AVAudioPlayerDelegate {
     }
     
     func play() async {
-        await withCheckedContinuation { continuation in
-            self.continuation = continuation
-            self.player.play()
+        self.playingTask?.cancel()
+        self.playingTask = Task { [weak self] in
+            self?.progressTask = Task.detached(priority: .utility) { [weak self] in
+                await withTaskCancellationHandler(operation: {
+                    while !Task.isCancelled {
+                        guard let self else { return }
+                        let progress = self.player.currentTime / self.player.duration
+                        self.progress = progress
+                        try? await Task.sleep(for: .milliseconds(16))
+                    }
+                }, onCancel: { [weak self] in
+                    self?.progress = 0
+                })
+            }
+            await withTaskCancellationHandler {
+                self?.isPlaying = true
+                await withCheckedContinuation { continuation in
+                    self?.continuation = continuation
+                    self?.player.play()
+                }
+                self?.isPlaying = false
+            } onCancel: { [weak self] in
+                if self?.player.isPlaying ?? false {
+                    self?.player.stop()
+                }
+                self?.isPlaying = false
+            }
         }
+  
+        await self.playingTask?.value
+    }
+    
+    func stop() {
+        self.playingTask?.cancel()
     }
     
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
