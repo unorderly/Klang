@@ -260,37 +260,39 @@ struct EditorView: View {
             .navigationTitle(Text(self.isExisting ? "Update Sound" : "New Sound"))
             .navigationBarTitleDisplayMode(.inline)
             .toolbarTitleDisplayMode(.inline)
-            .toolbar(content: {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button(action: {
-                        self.dismiss()
-                    }) {
-                        Text("Cancel")
-                    }
-                }
-
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button(self.isExisting ? "Update" : "Create") {
-                        guard let file else {
-                            return
-                        }
-                        let sound = Sound(id: self.id,
-                                          title: self.title,
-                                          symbol: self.symbol,
-                                          color: self.color,
-                                          url: file)
-                        if let index = Defaults[.sounds].firstIndex(where: { $0.id == self.id }) {
-                            Defaults[.sounds][index] = sound
-                        } else {
-                            Defaults[.sounds].append(sound)
-                        }
-                        self.dismiss()
-                    }
-                    .font(.headline)
-                    .disabled(self.file == nil || self.title.isEmpty)
-                }
-            })
+            // Toolbar was causing a bug when playing a sound.
+            .navigationBarItems(leading: self.cancelButton,
+                                trailing: self.doneButton)
         }
+    }
+    
+    var cancelButton: some View {
+        Button(action: {
+            self.dismiss()
+        }) {
+            Text("Cancel")
+        }
+    }
+    
+    var doneButton: some View {
+        Button(self.isExisting ? "Update" : "Create") {
+            guard let file else {
+                return
+            }
+            let sound = Sound(id: self.id,
+                              title: self.title,
+                              symbol: self.symbol,
+                              color: self.color,
+                              url: file)
+            if let index = Defaults[.sounds].firstIndex(where: { $0.id == self.id }) {
+                Defaults[.sounds][index] = sound
+            } else {
+                Defaults[.sounds].append(sound)
+            }
+            self.dismiss()
+        }
+        .font(.headline)
+        .disabled(self.file == nil || self.title.isEmpty)
     }
 }
 
@@ -303,9 +305,9 @@ struct EditorView: View {
             symbol: "🚦",
             color: .red,
             url: Bundle.main.url(
-                    forResource: "wait",
-                    withExtension: "m4a"
-                )!
+                forResource: "wait",
+                withExtension: "m4a"
+            )!
         )
     )
 }
