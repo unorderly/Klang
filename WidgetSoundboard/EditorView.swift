@@ -8,7 +8,7 @@
 import SwiftUI
 import Defaults
 import MCEmojiPicker
-
+import PhotosUI
 
 struct EditorView: View {
     @State var title: String
@@ -26,7 +26,9 @@ struct EditorView: View {
     
     @State var waveform: [Float] = []
     @State var audioPlayer: AudioPlayer?
-    
+
+    @State var photoItem: PhotosPickerItem?
+
     @Environment(\.dismiss) var dismiss
     
     init(title: String = "",
@@ -122,8 +124,8 @@ struct EditorView: View {
                             Spacer()
                             
                             VStack(alignment: .center, spacing: 8) {
-                                Button(action: {
-                                    
+                                AsyncButton(action: {
+                                    try await AudioBooster.normalizeAudioAndWriteToURL(audioURL: url)
                                 }) {
                                     Image(systemName: "timeline.selection")
                                         .imageScale(.large)
@@ -174,24 +176,35 @@ struct EditorView: View {
                             Spacer()
                             
                             VStack(alignment: .center, spacing: 8) {
-                                Button(action: {
-                                    
-                                }) {
-                                    Image(systemName: "link")
+                                PhotosPicker(selection: $photoItem,
+                                             matching: .videos) {
+                                    Image(systemName: "photo.on.rectangle.angled")
                                         .imageScale(.large)
                                         .padding(8)
                                         .font(.headline)
                                 }
                                 
-                                Text("Download")
+                                Text("Extract")
                                     .lineLimit(1)
                                     .foregroundStyle(.secondary)
                                     .font(.footnote)
                                     .fontWeight(.semibold)
                             }
                             .tint(Color.green)
-                            .disabled(true)
-                            
+                            .onChange(of: self.photoItem) { _, item in
+                                Task {
+                                    if let item {
+                                        let audio = try! await item.loadTransferable(type: VideoToAudio.self)!
+                                        let newPath = FileManager.default
+                                            .containerURL(forSecurityApplicationGroupIdentifier: "group.io.unorderly.soundboard")!
+                                            .appending(component: "\(self.id.uuidString)_\(UUID().uuidString)")
+                                            .appendingPathExtension("mp4")
+                                        try! await audio.extract(to: newPath)
+                                        self.file = newPath
+                                    }
+                                }
+                            }
+
                             Spacer()
                             
                             VStack(alignment: .center, spacing: 8) {
@@ -296,7 +309,55 @@ struct EditorView: View {
     }
 }
 
+struct VideoToAudio: Transferable {
+    let url: URL
 
+    static var transferRepresentation: some TransferRepresentation {
+        FileRepresentation(importedContentType: .movie) { received in
+            let copy = FileManager.default
+                .containerURL(forSecurityApplicationGroupIdentifier: "group.io.unorderly.soundboard")!
+                .appending(component: "\(UUID().uuidString)")
+                .appendingPathExtension("mov")
+            try FileManager.default.copyItem(at: received.file, to: copy)
+            return Self.init(url: copy)
+        }
+    }
+
+    func extract(to outputUrl: URL) async throws {
+        let asset = AVAsset(url: self.url)
+        let composition = AVMutableComposition()
+        let audioTracks = try await asset.loadTracks(withMediaType: .audio)
+
+
+        guard !audioTracks.isEmpty else {
+            throw "No tracks"
+        }
+
+        for track in audioTracks {
+            let timeRange = try await track.load(.timeRange)
+            let compositionTrack = composition.addMutableTrack(withMediaType: .audio, preferredTrackID: kCMPersistentTrackID_Invalid)!
+            try compositionTrack.insertTimeRange(timeRange, of: track, at: .zero)
+        }
+
+        guard let exportSession = AVAssetExportSession(asset: composition, presetName: AVAssetExportPresetAppleM4A) else {
+            throw "No export session"
+        }
+
+        let tempURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appending(path: UUID().uuidString).appendingPathExtension("m4a")
+        exportSession.outputURL = tempURL
+        exportSession.outputFileType = .m4a
+        await exportSession.export()
+        if let error = exportSession.error {
+            throw error
+        }
+        try FileManager.default.moveItem(at: tempURL, to: outputUrl)
+        try FileManager.default.removeItem(at: self.url)
+    }
+}
+
+extension String: Error {
+
+}
 #Preview("Edit") {
     EditorView(
         sound: .init(

@@ -56,6 +56,16 @@ public struct AsyncButton<Content: View>: View {
         self._isRunning = .constant(nil)
     }
     
+    public init<T: View>(action: @escaping () async throws -> Void, @ViewBuilder label: @escaping () -> T) where Content == AnyView {
+        self.action = action
+        self.label = { isLoading in
+            AnyView(label()
+                        .opacity(isLoading ? 0.5 : 1)
+                        .overlay(ProgressView().hidden(!isLoading)))
+        }
+        self._isRunning = .constant(nil)
+    }
+    
     public var body: some View {
         Button(action: {
             self.performAction()
