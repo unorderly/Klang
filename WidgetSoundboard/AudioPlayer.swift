@@ -76,6 +76,7 @@ final class AudioPlayer: NSObject, AVAudioPlayerDelegate {
             } onCancel: { [weak self] in
                 if self?.player.isPlaying ?? false {
                     self?.player.stop()
+                    self?.player.currentTime = 0
                 }
                 self?.isPlaying = false
             }

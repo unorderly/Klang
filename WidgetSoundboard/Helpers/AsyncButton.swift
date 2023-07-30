@@ -160,4 +160,18 @@ public extension Binding {
             }
         })
     }
+
+    func equals<T: Equatable>(_ value: T) -> Binding<Bool> where Value == T? {
+        self.map(to: {
+            $0 == value
+        }, from: {
+            if $0 {
+                return value
+            } else if self.wrappedValue != value {
+                return self.wrappedValue
+            } else {
+                return nil
+            }
+        })
+    }
 }

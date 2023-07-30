@@ -20,64 +20,28 @@ struct ContentView: View {
     
     @State var editingSound: Sound?
     
-    @ScaledMetric(relativeTo: .title2) var itemSize: CGFloat = 100
-    
+
     var body: some View {
         NavigationView {
             ScrollView(.vertical) {
                 LazyVGrid(columns: [
                     GridItem(.adaptive(minimum: 120), spacing: 16)
                 ], spacing: 16) {
-                    ReorderableForEach($sounds, allowReordering: .constant(true)) { sound, isDragging in
-                        Button(intent: SoundIntent(sound: .init(sound: sound), isFullBlast: false)) {
-                            VStack(spacing: 8) {
-                                HStack(alignment: .top) {
-                                    Text(sound.symbol)
-                                        .font(.largeTitle)
-                                    Spacer()
-                                }
-                                
-                                Spacer()
-                                
-                                Text(sound.title)
-                                    .lineLimit(1)
-                                    .font(.headline)
-                                    .bold()
-                                    .alignment(.leading)
-                            }
-                            .padding(4)
-                            .padding(.bottom, 4)
-                            .frame(height: itemSize)
-                        }
-                        .overlay {
-                            Menu(content: {
-                                Button(role: .destructive, action: {
-                                    self.sounds.removeAll(where: { $0 == sound })
-                                }) {
-                                    Label("Delete", systemImage: "trash")
-                                }
-                            }, label: {
-                                Image(systemName: "ellipsis.circle.fill")
-                                    .symbolRenderingMode(.hierarchical)
-                                    .imageScale(.large)
-                                    .font(.headline)
-                            }, primaryAction: {
-                                self.editingSound = sound
+                    ReorderableForEach($sounds, allowReordering: .constant(true)) {
+                        sound,
+                        isDragging in
+                        SoundButton(sound: sound,
+                                    isEditing: $editingSound.equals(sound),
+                                    delete: {
+                            self.sounds.removeAll(where: {
+                                $0 == sound
                             })
-                            .menuStyle(.button)
-                            .buttonStyle(.borderless)
-                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
-                            .padding(12)
-                        }
-                        .buttonBorderShape(.roundedRectangle)
-                        .buttonStyle(.bordered)
-                        .tint(sound.color)
+                        })
                         .opacity(isDragging ? 0.5 : 1)
                         .contentShape(.dragPreview, RoundedRectangle(cornerRadius: 20))
                     }
                 }
                 .padding()
-//                .onDelete { self.sounds.remove(atOffsets: $0) }
             }
             .toolbar {
                 ToolbarItem {
@@ -104,6 +68,82 @@ struct ContentView: View {
     }
 }
 
+struct SoundButton: View {
+
+    var sound: Sound
+
+    @Binding var isEditing: Bool
+
+    var delete: () -> Void
+
+    @ScaledMetric(relativeTo: .title2) private var itemSize: CGFloat = 100
+
+    @State private var player: AudioPlayer?
+
+    var body: some View {
+        Button(action: {
+            let audioPlayer = try! self.player ?? AudioPlayer(url: sound.url)
+            self.player = audioPlayer
+            if audioPlayer.player.isPlaying {
+                audioPlayer.stop()
+            } else {
+                Task {
+                    await audioPlayer.play()
+                }
+            }
+        }) {
+            VStack(spacing: 8) {
+                HStack(alignment: .top) {
+                    Text(sound.symbol)
+                        .font(.largeTitle)
+                    Spacer()
+                }
+
+                Spacer()
+
+                HStack {
+                    Text(sound.title)
+                    Spacer()
+                    Image(systemName: "speaker.wave.3.fill")
+                        .symbolEffect(.variableColor
+                            .cumulative
+                            .nonReversing,
+                                      options: .repeating,
+                                      isActive: self.player?.isPlaying ?? false)
+                        .opacity(self.player?.isPlaying ?? false ? 1 : 0)
+                }
+                .lineLimit(1)
+                .font(.headline)
+                .bold()
+            }
+            .padding(4)
+            .padding(.bottom, 4)
+            .frame(height: itemSize)
+        }
+        .overlay {
+            Menu(content: {
+                Button(role: .destructive, action: self.delete) {
+                    Label("Delete", systemImage: "trash")
+                }
+            }, label: {
+                Image(systemName: "ellipsis.circle.fill")
+                    .symbolRenderingMode(.hierarchical)
+                    .imageScale(.large)
+                    .font(.headline)
+            }, primaryAction: {
+                self.isEditing = true
+            })
+            .menuStyle(.button)
+            .buttonStyle(.borderless)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
+            .padding(12)
+        }
+        .buttonBorderShape(.roundedRectangle)
+        .buttonStyle(.bordered)
+        .tint(sound.color)
+        .animation(.default, value: self.player?.isPlaying ?? false)
+    }
+}
 
 #Preview {
     ContentView()
