@@ -59,7 +59,9 @@ final class AudioPlayer: NSObject, AVAudioPlayerDelegate {
                     while !Task.isCancelled {
                         guard let self else { return }
                         let progress = self.player.currentTime / self.player.duration
-                        self.progress = progress
+                        await MainActor.run {
+                            self.progress = progress
+                        }
                         try? await Task.sleep(for: .milliseconds(16))
                     }
                 }, onCancel: { [weak self] in
@@ -77,6 +79,7 @@ final class AudioPlayer: NSObject, AVAudioPlayerDelegate {
                 if self?.player.isPlaying ?? false {
                     self?.player.stop()
                     self?.player.currentTime = 0
+                    self?.continuation?.resume()
                 }
                 self?.isPlaying = false
             }
