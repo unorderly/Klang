@@ -51,6 +51,10 @@
 		B340402F2A3A5D7500A1D23E /* horse.m4a in Resources */ = {isa = PBXBuildFile; fileRef = B34040292A3A1FEC00A1D23E /* horse.m4a */; };
 		B34C782F2A8F7AAE009A8BAA /* BoardEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34C782E2A8F7AAE009A8BAA /* BoardEditor.swift */; };
 		B34C78312A8F8463009A8BAA /* Modify.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34C78302A8F8463009A8BAA /* Modify.swift */; };
+		B34C78332A8FAE09009A8BAA /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34C78322A8FAE09009A8BAA /* BoardView.swift */; };
+		B34C78352A8FAE52009A8BAA /* AddSoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34C78342A8FAE52009A8BAA /* AddSoundView.swift */; };
+		B34C78372A8FB1CF009A8BAA /* SoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34C78362A8FB1CF009A8BAA /* SoundButton.swift */; };
+		B34C78392A8FB262009A8BAA /* BoardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34C78382A8FB262009A8BAA /* BoardButton.swift */; };
 		B3A8FD422A70FD9400357001 /* AudioBooster.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A8FD412A70FD9400357001 /* AudioBooster.swift */; };
 		B3A8FD442A71000500357001 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A8FD432A71000500357001 /* AudioPlayer.swift */; };
 		B3A8FD452A71032300357001 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A8FD432A71000500357001 /* AudioPlayer.swift */; };
@@ -146,6 +150,10 @@
 		B34040292A3A1FEC00A1D23E /* horse.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = horse.m4a; sourceTree = "<group>"; };
 		B34C782E2A8F7AAE009A8BAA /* BoardEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardEditor.swift; sourceTree = "<group>"; };
 		B34C78302A8F8463009A8BAA /* Modify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modify.swift; sourceTree = "<group>"; };
+		B34C78322A8FAE09009A8BAA /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
+		B34C78342A8FAE52009A8BAA /* AddSoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSoundView.swift; sourceTree = "<group>"; };
+		B34C78362A8FB1CF009A8BAA /* SoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundButton.swift; sourceTree = "<group>"; };
+		B34C78382A8FB262009A8BAA /* BoardButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardButton.swift; sourceTree = "<group>"; };
 		B3A8FD412A70FD9400357001 /* AudioBooster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioBooster.swift; sourceTree = "<group>"; };
 		B3A8FD432A71000500357001 /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		B3DD59DC2A6B070500314F4E /* AudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
@@ -217,6 +225,10 @@
 			children = (
 				B30338E62A30D06300CEDD47 /* App.swift */,
 				B30338E82A30D06300CEDD47 /* ContentView.swift */,
+				B34C78382A8FB262009A8BAA /* BoardButton.swift */,
+				B34C78322A8FAE09009A8BAA /* BoardView.swift */,
+				B34C78342A8FAE52009A8BAA /* AddSoundView.swift */,
+				B34C78362A8FB1CF009A8BAA /* SoundButton.swift */,
 				B321932F2A3FAD0C0050B011 /* EditorView.swift */,
 				B34C782E2A8F7AAE009A8BAA /* BoardEditor.swift */,
 				B30FD8412A6E637B00990160 /* RecordingButton.swift */,
@@ -493,6 +505,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B34C782F2A8F7AAE009A8BAA /* BoardEditor.swift in Sources */,
+				B34C78372A8FB1CF009A8BAA /* SoundButton.swift in Sources */,
 				B34C78312A8F8463009A8BAA /* Modify.swift in Sources */,
 				B30FD83D2A6E5A1800990160 /* ColorRow.swift in Sources */,
 				B30338E92A30D06300CEDD47 /* ContentView.swift in Sources */,
@@ -503,12 +516,15 @@
 				B30FD8462A6E8A1800990160 /* WaveformAnalyzer.swift in Sources */,
 				B3A8FD422A70FD9400357001 /* AudioBooster.swift in Sources */,
 				B30FD8482A6E8AB100990160 /* TempiFFT.swift in Sources */,
+				B34C78392A8FB262009A8BAA /* BoardButton.swift in Sources */,
 				B32193302A3FAD0C0050B011 /* EditorView.swift in Sources */,
 				B3DD59DD2A6B070500314F4E /* AudioRecorder.swift in Sources */,
 				B3A8FD442A71000500357001 /* AudioPlayer.swift in Sources */,
 				B30FD8442A6E7DEB00990160 /* WaveformView.swift in Sources */,
+				B34C78332A8FAE09009A8BAA /* BoardView.swift in Sources */,
 				B30FD8422A6E637B00990160 /* RecordingButton.swift in Sources */,
 				B30338E72A30D06300CEDD47 /* App.swift in Sources */,
+				B34C78352A8FAE52009A8BAA /* AddSoundView.swift in Sources */,
 				B34040272A398F1800A1D23E /* Color.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
