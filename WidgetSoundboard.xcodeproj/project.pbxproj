@@ -19,7 +19,6 @@
 		B303393B2A30D34D00CEDD47 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B303391E2A30D25300CEDD47 /* WidgetKit.framework */; };
 		B303393C2A30D34D00CEDD47 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B30339202A30D25300CEDD47 /* SwiftUI.framework */; };
 		B303393F2A30D34D00CEDD47 /* SoundWidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = B303393E2A30D34D00CEDD47 /* SoundWidgetBundle.swift */; };
-		B30339412A30D34D00CEDD47 /* SoundWidgetLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30339402A30D34D00CEDD47 /* SoundWidgetLiveActivity.swift */; };
 		B30339432A30D34D00CEDD47 /* SoundWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30339422A30D34D00CEDD47 /* SoundWidget.swift */; };
 		B30339452A30D34D00CEDD47 /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30339442A30D34D00CEDD47 /* AppIntent.swift */; };
 		B30339472A30D34D00CEDD47 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B30339462A30D34D00CEDD47 /* Assets.xcassets */; };
@@ -55,6 +54,13 @@
 		B34C78352A8FAE52009A8BAA /* AddSoundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34C78342A8FAE52009A8BAA /* AddSoundView.swift */; };
 		B34C78372A8FB1CF009A8BAA /* SoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34C78362A8FB1CF009A8BAA /* SoundButton.swift */; };
 		B34C78392A8FB262009A8BAA /* BoardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34C78382A8FB262009A8BAA /* BoardButton.swift */; };
+		B34C783B2A8FBE10009A8BAA /* SoundEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34C783A2A8FBE10009A8BAA /* SoundEntity.swift */; };
+		B34C783C2A8FBE26009A8BAA /* SoundEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34C783A2A8FBE10009A8BAA /* SoundEntity.swift */; };
+		B34C783E2A8FBE44009A8BAA /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34C783D2A8FBE44009A8BAA /* Queue.swift */; };
+		B34C78402A8FBE5F009A8BAA /* BoardEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34C783F2A8FBE5F009A8BAA /* BoardEntity.swift */; };
+		B34C78412A8FBFB9009A8BAA /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34C783D2A8FBE44009A8BAA /* Queue.swift */; };
+		B34C78422A8FBFC8009A8BAA /* BoardEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34C783F2A8FBE5F009A8BAA /* BoardEntity.swift */; };
+		B34C78432A8FCE8C009A8BAA /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30339442A30D34D00CEDD47 /* AppIntent.swift */; };
 		B3A8FD422A70FD9400357001 /* AudioBooster.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A8FD412A70FD9400357001 /* AudioBooster.swift */; };
 		B3A8FD442A71000500357001 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A8FD432A71000500357001 /* AudioPlayer.swift */; };
 		B3A8FD452A71032300357001 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A8FD432A71000500357001 /* AudioPlayer.swift */; };
@@ -129,7 +135,6 @@
 		B30339202A30D25300CEDD47 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		B303393A2A30D34D00CEDD47 /* SoundWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SoundWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		B303393E2A30D34D00CEDD47 /* SoundWidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundWidgetBundle.swift; sourceTree = "<group>"; };
-		B30339402A30D34D00CEDD47 /* SoundWidgetLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundWidgetLiveActivity.swift; sourceTree = "<group>"; };
 		B30339422A30D34D00CEDD47 /* SoundWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundWidget.swift; sourceTree = "<group>"; };
 		B30339442A30D34D00CEDD47 /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
 		B30339462A30D34D00CEDD47 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -154,6 +159,9 @@
 		B34C78342A8FAE52009A8BAA /* AddSoundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSoundView.swift; sourceTree = "<group>"; };
 		B34C78362A8FB1CF009A8BAA /* SoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundButton.swift; sourceTree = "<group>"; };
 		B34C78382A8FB262009A8BAA /* BoardButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardButton.swift; sourceTree = "<group>"; };
+		B34C783A2A8FBE10009A8BAA /* SoundEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundEntity.swift; sourceTree = "<group>"; };
+		B34C783D2A8FBE44009A8BAA /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
+		B34C783F2A8FBE5F009A8BAA /* BoardEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardEntity.swift; sourceTree = "<group>"; };
 		B3A8FD412A70FD9400357001 /* AudioBooster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioBooster.swift; sourceTree = "<group>"; };
 		B3A8FD432A71000500357001 /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		B3DD59DC2A6B070500314F4E /* AudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
@@ -240,6 +248,8 @@
 				B30FD8452A6E8A1800990160 /* WaveformAnalyzer.swift */,
 				B30FD8472A6E8AB100990160 /* TempiFFT.swift */,
 				B30339142A30D08100CEDD47 /* Intent.swift */,
+				B34C783A2A8FBE10009A8BAA /* SoundEntity.swift */,
+				B34C783F2A8FBE5F009A8BAA /* BoardEntity.swift */,
 				B30338EF2A30D06300CEDD47 /* Data.swift */,
 				B321932E2A3FACAD0050B011 /* Helpers */,
 				B321932D2A3FAC880050B011 /* Sounds */,
@@ -290,7 +300,6 @@
 			children = (
 				B303395A2A32B43600CEDD47 /* SoundWidgetExtension.entitlements */,
 				B303393E2A30D34D00CEDD47 /* SoundWidgetBundle.swift */,
-				B30339402A30D34D00CEDD47 /* SoundWidgetLiveActivity.swift */,
 				B30339422A30D34D00CEDD47 /* SoundWidget.swift */,
 				B30339442A30D34D00CEDD47 /* AppIntent.swift */,
 				B30339462A30D34D00CEDD47 /* Assets.xcassets */,
@@ -313,6 +322,7 @@
 		B321932E2A3FACAD0050B011 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				B34C783D2A8FBE44009A8BAA /* Queue.swift */,
 				B32BF3432A38E7D3005BFA59 /* Alignment.swift */,
 				B32BF35D2A39891E005BFA59 /* AsyncButton.swift */,
 				B34040262A398F1800A1D23E /* Color.swift */,
@@ -504,6 +514,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B34C78402A8FBE5F009A8BAA /* BoardEntity.swift in Sources */,
 				B34C782F2A8F7AAE009A8BAA /* BoardEditor.swift in Sources */,
 				B34C78372A8FB1CF009A8BAA /* SoundButton.swift in Sources */,
 				B34C78312A8F8463009A8BAA /* Modify.swift in Sources */,
@@ -519,9 +530,12 @@
 				B34C78392A8FB262009A8BAA /* BoardButton.swift in Sources */,
 				B32193302A3FAD0C0050B011 /* EditorView.swift in Sources */,
 				B3DD59DD2A6B070500314F4E /* AudioRecorder.swift in Sources */,
+				B34C783B2A8FBE10009A8BAA /* SoundEntity.swift in Sources */,
 				B3A8FD442A71000500357001 /* AudioPlayer.swift in Sources */,
 				B30FD8442A6E7DEB00990160 /* WaveformView.swift in Sources */,
 				B34C78332A8FAE09009A8BAA /* BoardView.swift in Sources */,
+				B34C783E2A8FBE44009A8BAA /* Queue.swift in Sources */,
+				B34C78432A8FCE8C009A8BAA /* AppIntent.swift in Sources */,
 				B30FD8422A6E637B00990160 /* RecordingButton.swift in Sources */,
 				B30338E72A30D06300CEDD47 /* App.swift in Sources */,
 				B34C78352A8FAE52009A8BAA /* AddSoundView.swift in Sources */,
@@ -551,12 +565,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				B30339432A30D34D00CEDD47 /* SoundWidget.swift in Sources */,
+				B34C78422A8FBFC8009A8BAA /* BoardEntity.swift in Sources */,
 				B34040282A398F1800A1D23E /* Color.swift in Sources */,
 				B303394F2A30D39C00CEDD47 /* Intent.swift in Sources */,
 				B32BF3452A38E7D3005BFA59 /* Alignment.swift in Sources */,
 				B30339452A30D34D00CEDD47 /* AppIntent.swift in Sources */,
 				B32BF35F2A39891F005BFA59 /* AsyncButton.swift in Sources */,
-				B30339412A30D34D00CEDD47 /* SoundWidgetLiveActivity.swift in Sources */,
+				B34C783C2A8FBE26009A8BAA /* SoundEntity.swift in Sources */,
+				B34C78412A8FBFB9009A8BAA /* Queue.swift in Sources */,
 				B3A8FD452A71032300357001 /* AudioPlayer.swift in Sources */,
 				B303393F2A30D34D00CEDD47 /* SoundWidgetBundle.swift in Sources */,
 				B32BF3462A38F3F1005BFA59 /* Data.swift in Sources */,

@@ -11,7 +11,7 @@ import SwiftUI
 @main
 struct SoundWidgetBundle: WidgetBundle {
     var body: some Widget {
-        SoundWidget()
-        SoundWidgetLiveActivity()
+        SoundsWidget()
+        BoardWidget()
     }
 }

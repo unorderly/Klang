@@ -7,55 +7,78 @@
 
 import WidgetKit
 import SwiftUI
+import Defaults
 
-struct Provider: AppIntentTimelineProvider {
+struct SoundTimelineProvider: AppIntentTimelineProvider {
+    typealias Entry = SoundsEntry
+    typealias Intent = SoundsWidgetConfigIntent
 
-    func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), configuration: ConfigurationAppIntent())
+    func placeholder(in context: Context) -> Entry {
+        .init(date: Date(), config: .init())
     }
 
-    func snapshot(for configuration: ConfigurationAppIntent, in context: Context) async -> SimpleEntry {
-        SimpleEntry(date: Date(), configuration: configuration)
+    func snapshot(for configuration: Intent, in context: Context) async -> Entry {
+        .init(date: Date(), config: configuration)
     }
 
-    func timeline(for configuration: ConfigurationAppIntent, in context: Context) async -> Timeline<SimpleEntry> {
-        return Timeline(entries: [.init(date: .now, configuration: configuration)], policy: .never)
+    func timeline(for configuration: Intent, in context: Context) async -> Timeline<Entry> {
+        return Timeline(entries: [.init(date: .now, config: configuration)], policy: .never)
     }
 }
 
-struct SimpleEntry: TimelineEntry {
+struct BoardTimelineProvider: AppIntentTimelineProvider {
+    typealias Entry = BoardEntry
+    typealias Intent = BoardWidgetConfigIntent
+
+    func placeholder(in context: Context) -> Entry {
+        .init(date: Date(), config: .init())
+    }
+
+    func snapshot(for configuration: Intent, in context: Context) async -> Entry {
+        .init(date: Date(), config: configuration)
+    }
+
+    func timeline(for configuration: Intent, in context: Context) async -> Timeline<Entry> {
+        return Timeline(entries: [.init(date: .now, config: configuration)], policy: .never)
+    }
+}
+
+
+struct SoundsEntry: SoundboardTimelineEntry {
+
     var date: Date
+    let config: SoundsWidgetConfigIntent
+    var sounds: [SoundEntity] { config.sounds }
 
-    var playingSound: String? = nil
-
-    let configuration: ConfigurationAppIntent
+    var isFullBlast: Bool { config.isFullBlast }
+    var board: BoardEntity? { nil }
 }
 
-struct SoundWidgetEntryView : View {
-    var entry: Provider.Entry
+struct BoardEntry: SoundboardTimelineEntry {
+    var date: Date
+    let config: BoardWidgetConfigIntent
+
+    var sounds: [SoundEntity] {
+        config.board?.sounds ?? []
+    }
+
+    var isFullBlast: Bool { config.isFullBlast }
+
+    var board: BoardEntity? { config.board }
+
+}
+
+protocol SoundboardTimelineEntry: TimelineEntry {
+
+    var sounds: [SoundEntity] { get }
+    var isFullBlast: Bool { get }
+    var board: BoardEntity? { get }
+}
+
+struct SoundWidgetEntryView<Entry: SoundboardTimelineEntry>: View {
+    var entry: Entry
 
     @Environment(\.widgetFamily) var widgetFamily
-
-    var maxCount: Int {
-        switch widgetFamily {
-        case .systemSmall:
-            return 4
-        case .systemMedium:
-            return 8
-        case .systemLarge:
-            return 16
-        case .systemExtraLarge:
-            return 32
-        case .accessoryCircular:
-            return 1
-        case .accessoryRectangular:
-            return 2
-        case .accessoryInline:
-            return 0
-        @unknown default:
-            return 0
-        }
-    }
 
     struct Row: Identifiable {
         let index: Int
@@ -63,6 +86,7 @@ struct SoundWidgetEntryView : View {
 
         var id: Int { self.index }
     }
+
     enum Item: Identifiable {
         case sound(SoundEntity, Int)
         case placeholder(Int)
@@ -76,8 +100,12 @@ struct SoundWidgetEntryView : View {
             }
         }
     }
+
+    var sounds: [SoundEntity] {
+        self.entry.sounds
+    }
+
     func rows(with numberOfRows: Int) -> [Row] {
-        let sounds = self.entry.configuration.sounds
         let columns = numberOfRows * self.widgetFamily.aspectRatio
         print(sounds.count, numberOfRows, columns)
         let items = sounds.enumerated().map({ Item.sound($0.element, $0.offset) }).fillOrPrefix(to: columns * numberOfRows, using: Item.placeholder)
@@ -91,39 +119,50 @@ struct SoundWidgetEntryView : View {
     }
 
     var maxRows: Int {
-        self.widgetFamily.rows(for: self.entry.configuration.sounds.count)
+        self.widgetFamily.rows(for: self.sounds.count)
     }
 
-    @ScaledMetric(relativeTo: .title2) var size: CGFloat = 44
+    @ScaledMetric(relativeTo: .title2) var size: CGFloat = 30
     var body: some View {
         Group {
-            if entry.configuration.sounds.isEmpty {
+            if sounds.isEmpty {
                 Text("Tap and hold the widget to add sounds")
             } else {
-                ViewThatFits {
-                    ForEach((1...self.maxRows).reversed(), id: \.self) { count in
-                        VStack(spacing: 4) {
-                            ForEach(self.rows(with: count)) { row in
-                                HStack(spacing: 4) {
-                                    ForEach(row.items) { item in
-                                        Group {
-                                            switch item {
-                                            case .sound(let sound, _):
-                                                Button(intent: SoundIntent(sound: sound, isFullBlast: entry.configuration.isFullBlast)) {
-                                                    Text(sound.symbol)
-                                                        .minimumScaleFactor(0.5)
-                                                        .font(.title2)
-                                                        .aligned(to: .all)
-                                                        .padding(4)
+                VStack {
+                    if let board = entry.board {
+                        HStack {
+                            Text(board.symbol)
+                            Text(board.title)
+                            Spacer()
+                        }
+                        .font(.headline)
+                        Divider()
+                    }
+                    ViewThatFits {
+                        ForEach((1...self.maxRows).reversed(), id: \.self) { count in
+                            VStack(spacing: 4) {
+                                ForEach(self.rows(with: count)) { row in
+                                    HStack(spacing: 4) {
+                                        ForEach(row.items) { item in
+                                            Group {
+                                                switch item {
+                                                case .sound(let sound, _):
+                                                    Button(intent: SoundIntent(sound: sound, isFullBlast: entry.isFullBlast)) {
+                                                        Text(sound.symbol)
+                                                            .minimumScaleFactor(0.5)
+                                                            .font(.title2)
+                                                            .aligned(to: .all)
+                                                    }
+                                                    .buttonBorderShape(.roundedRectangle)
+                                                    .buttonStyle(.bordered)
+//                                                    .buttonStyle(.borderless)
+                                                    .tint(Color(hex: sound.color) ?? .red)
+                                                case .placeholder:
+                                                    Color.clear
                                                 }
-                                                .buttonBorderShape(.roundedRectangle)
-                                                .buttonStyle(.bordered)
-                                                .tint(Color(hex: sound.color) ?? .red)
-                                            case .placeholder:
-                                                Color.clear
                                             }
+                                            .frame(minWidth: size, minHeight: size)
                                         }
-                                        .frame(minWidth: size, minHeight: size)
                                     }
                                 }
                             }
@@ -169,83 +208,102 @@ extension WidgetFamily {
     }
 
     func rows(for count: Int) -> Int {
-        // x * r = c <=> x = c / r
-        // r = 2
-        // c = 4 => 1
-        // c = 5 => 2
         Int(ceil(sqrt(ceil(Double(count) / Double(aspectRatio)))))
     }
 }
-struct SoundWidget: Widget {
-    let kind: String = "SoundWidget"
+
+struct SoundsWidget: Widget {
+    let kind: String = "app.klang.sounds_widget"
 
     var body: some WidgetConfiguration {
-        AppIntentConfiguration(kind: kind, intent: ConfigurationAppIntent.self, provider: Provider()) { entry in
+        AppIntentConfiguration(kind: kind, intent: SoundsWidgetConfigIntent.self, provider: SoundTimelineProvider()) { entry in
             SoundWidgetEntryView(entry: entry)
         }
+        .configurationDisplayName("Sounds")
+        .description("Choose from all your sounds")
         .supportedFamilies([
             .accessoryRectangular, .accessoryRectangular, .systemLarge, .systemSmall, .systemMedium, .systemExtraLarge
         ])
-        //        .contentMarginsDisabled()
         .containerBackgroundRemovable()
     }
 }
 
-extension ConfigurationAppIntent {
-    fileprivate static var smiley: ConfigurationAppIntent {
-        let intent = ConfigurationAppIntent()
+
+struct BoardWidget: Widget {
+    let kind: String = "app.klang.board_widget"
+
+    var body: some WidgetConfiguration {
+        AppIntentConfiguration(kind: kind, intent: BoardWidgetConfigIntent.self, provider: BoardTimelineProvider()) { entry in
+            SoundWidgetEntryView(entry: entry)
+        }
+        .configurationDisplayName("Board")
+        .description("Select one of your boards and get its sounds in the widget")
+        .supportedFamilies([
+            .systemLarge, .systemSmall, .systemMedium, .systemExtraLarge
+        ])
+        .containerBackgroundRemovable()
+    }
+}
+
+extension SoundsEntry {
+    fileprivate static var defaultEntry: Self {
+        let intent = SoundsWidgetConfigIntent()
         intent.sounds = Sound.default.map({ SoundEntity(sound: $0) })
-//            .dropLast(2)
-                + Sound.default.map({ SoundEntity(sound: $0) })
-        return intent
+        return .init(date: .now, config: intent)
     }
 
-    fileprivate static var starEyes: ConfigurationAppIntent {
-        let intent = ConfigurationAppIntent()
-        //        intent.soundboard = 0
-        return intent
+    fileprivate static var empty: SoundsEntry {
+        let intent = SoundsWidgetConfigIntent()
+        return .init(date: .now, config: intent)
+    }
+}
+
+extension BoardEntry {
+    fileprivate static var defaultEntry: Self {
+        let intent = BoardWidgetConfigIntent()
+        intent.board = BoardEntity(board: .default.first!)
+        return .init(date: .now, config: intent)
     }
 }
 
 #Preview(as: .systemSmall) {
-    SoundWidget()
+    SoundsWidget()
 } timeline: {
-    SimpleEntry(date: .now, configuration: .smiley)
-    SimpleEntry(date: .now, configuration: .starEyes)
+    SoundsEntry.defaultEntry
+}
+
+#Preview("Board", as: .systemSmall) {
+    BoardWidget()
+} timeline: {
+    BoardEntry.defaultEntry
 }
 
 #Preview(as: .systemMedium) {
-    SoundWidget()
+    SoundsWidget()
 } timeline: {
-    SimpleEntry(date: .now, configuration: .smiley)
-    SimpleEntry(date: .now, configuration: .starEyes)
+    SoundsEntry.defaultEntry
 }
-
 #Preview(as: .systemLarge) {
-    SoundWidget()
+    SoundsWidget()
 } timeline: {
-    SimpleEntry(date: .now, configuration: .smiley)
-    SimpleEntry(date: .now, configuration: .starEyes)
+    SoundsEntry.defaultEntry
 }
 
 #Preview(as: .systemExtraLarge) {
-    SoundWidget()
+    SoundsWidget()
 } timeline: {
-    SimpleEntry(date: .now, configuration: .smiley)
-    SimpleEntry(date: .now, configuration: .starEyes)
+    SoundsEntry.defaultEntry
 }
 
 #Preview(as: .accessoryCircular) {
-    SoundWidget()
+    SoundsWidget()
 } timeline: {
-    SimpleEntry(date: .now, configuration: .smiley)
-    SimpleEntry(date: .now, configuration: .starEyes)
+    SoundsEntry.defaultEntry
 }
 
 
 #Preview(as: .accessoryRectangular) {
-    SoundWidget()
+    SoundsWidget()
 } timeline: {
-    SimpleEntry(date: .now, configuration: .smiley)
-    SimpleEntry(date: .now, configuration: .starEyes)
+    SoundsEntry.defaultEntry
 }
