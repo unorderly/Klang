@@ -49,6 +49,8 @@
 		B340402D2A3A5D7500A1D23E /* frog.caf in Resources */ = {isa = PBXBuildFile; fileRef = B30339542A32AB3800CEDD47 /* frog.caf */; };
 		B340402E2A3A5D7500A1D23E /* seagulls.caf in Resources */ = {isa = PBXBuildFile; fileRef = B30339532A32AB3800CEDD47 /* seagulls.caf */; };
 		B340402F2A3A5D7500A1D23E /* horse.m4a in Resources */ = {isa = PBXBuildFile; fileRef = B34040292A3A1FEC00A1D23E /* horse.m4a */; };
+		B34C782F2A8F7AAE009A8BAA /* BoardEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34C782E2A8F7AAE009A8BAA /* BoardEditor.swift */; };
+		B34C78312A8F8463009A8BAA /* Modify.swift in Sources */ = {isa = PBXBuildFile; fileRef = B34C78302A8F8463009A8BAA /* Modify.swift */; };
 		B3A8FD422A70FD9400357001 /* AudioBooster.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A8FD412A70FD9400357001 /* AudioBooster.swift */; };
 		B3A8FD442A71000500357001 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A8FD432A71000500357001 /* AudioPlayer.swift */; };
 		B3A8FD452A71032300357001 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A8FD432A71000500357001 /* AudioPlayer.swift */; };
@@ -142,6 +144,8 @@
 		B32BF35D2A39891E005BFA59 /* AsyncButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncButton.swift; sourceTree = "<group>"; };
 		B34040262A398F1800A1D23E /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		B34040292A3A1FEC00A1D23E /* horse.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = horse.m4a; sourceTree = "<group>"; };
+		B34C782E2A8F7AAE009A8BAA /* BoardEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardEditor.swift; sourceTree = "<group>"; };
+		B34C78302A8F8463009A8BAA /* Modify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modify.swift; sourceTree = "<group>"; };
 		B3A8FD412A70FD9400357001 /* AudioBooster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioBooster.swift; sourceTree = "<group>"; };
 		B3A8FD432A71000500357001 /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
 		B3DD59DC2A6B070500314F4E /* AudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
@@ -214,6 +218,7 @@
 				B30338E62A30D06300CEDD47 /* App.swift */,
 				B30338E82A30D06300CEDD47 /* ContentView.swift */,
 				B321932F2A3FAD0C0050B011 /* EditorView.swift */,
+				B34C782E2A8F7AAE009A8BAA /* BoardEditor.swift */,
 				B30FD8412A6E637B00990160 /* RecordingButton.swift */,
 				B30FD83C2A6E5A1800990160 /* ColorRow.swift */,
 				B30FD8432A6E7DEB00990160 /* WaveformView.swift */,
@@ -299,6 +304,7 @@
 				B32BF3432A38E7D3005BFA59 /* Alignment.swift */,
 				B32BF35D2A39891E005BFA59 /* AsyncButton.swift */,
 				B34040262A398F1800A1D23E /* Color.swift */,
+				B34C78302A8F8463009A8BAA /* Modify.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -486,6 +492,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B34C782F2A8F7AAE009A8BAA /* BoardEditor.swift in Sources */,
+				B34C78312A8F8463009A8BAA /* Modify.swift in Sources */,
 				B30FD83D2A6E5A1800990160 /* ColorRow.swift in Sources */,
 				B30338E92A30D06300CEDD47 /* ContentView.swift in Sources */,
 				B32BF3442A38E7D3005BFA59 /* Alignment.swift in Sources */,

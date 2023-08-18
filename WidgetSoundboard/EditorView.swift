@@ -23,7 +23,9 @@ struct EditorView: View {
     @State var id: UUID = .init()
     
     @State var isExisting = false
-    
+
+    var boardID: UUID?
+
     @State var waveform: [Float] = []
     @State var audioPlayer: AudioPlayer?
 
@@ -36,22 +38,25 @@ struct EditorView: View {
          file: URL? = nil,
          color: Color = .red,
          id: UUID = .init(),
-         isExisting: Bool = false) {
+         isExisting: Bool = false,
+         boardID: UUID? = nil) {
         self._title = State(initialValue: title)
         self._symbol = State(initialValue: symbol)
         self._file = State(initialValue: file)
         self._color = State(initialValue: color)
         self._id = State(initialValue: id)
         self._isExisting = State(initialValue: isExisting)
+        self.boardID = boardID
     }
     
-    init(sound: Sound) {
+    init(sound: Sound, boardID: UUID? = nil) {
         self.init(title: sound.title,
                   symbol: sound.symbol,
                   file: sound.url,
                   color: sound.color,
                   id: sound.id,
-                  isExisting: true)
+                  isExisting: true,
+                  boardID: boardID)
     }
     
     var presetColors: [Color] {
@@ -79,6 +84,7 @@ struct EditorView: View {
                         )
                         
                         TextField("Title", text: $title)
+                            .font(.title3.weight(.semibold))
                     }
                     
                     ColorRow(selected: $color, colors: self.presetColors)
@@ -297,10 +303,10 @@ struct EditorView: View {
                               symbol: self.symbol,
                               color: self.color,
                               url: file)
-            if let index = Defaults[.sounds].firstIndex(where: { $0.id == self.id }) {
-                Defaults[.sounds][index] = sound
-            } else {
-                Defaults[.sounds].append(sound)
+            Defaults[.sounds].upsert(sound, by: \.id)
+            if let boardID, var board = Defaults[.boards].first(where: { $0.id == boardID }) {
+                board.sounds.append(self.id)
+                Defaults[.boards].upsert(board, by: \.id)
             }
             self.dismiss()
         }

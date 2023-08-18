@@ -29,6 +29,52 @@ extension Defaults.Keys {
             return sound.set(\.url, to: newURL)
         }
     }
+
+    static let boards = Defaults.Key<[Board]>("app_soundboard_soundboards", suite: .kit) {
+        Board.default
+    }
+}
+
+struct Board: Codable, Defaults.Serializable, Identifiable, Hashable {
+    var id: UUID
+    var title: String
+    var symbol: String
+    var color: Color
+    var sounds: [UUID]
+
+    init(id: UUID = .init(), title: String, symbol: String, color: Color, sounds: [UUID]) {
+        self.id = id
+        self.title = title
+        self.symbol = symbol
+        self.color = color
+        self.sounds = sounds
+    }
+
+    public func set<Value>(_ keyPath: WritableKeyPath<Self, Value>, to value: Value) -> Self {
+        var object = self
+        object[keyPath: keyPath] = value
+        return object
+    }
+
+    static var `default`: [Board] = [
+        .init(id: UUID(uuidString: "052171A6-1018-4DAB-8E97-27A6DDFC0018")!,
+              title: "Klang",
+              symbol: "🔔",
+              color: .pink,
+              sounds: Sound.default.map(\.id))
+    ]
+
+    static var allID: UUID {
+        UUID(uuidString: "11111111-1111-1111-1111-111111111111")!
+    }
+
+    static func allBoard(with sounds: [Sound]) -> Board {
+        Board(id: Board.allID,
+              title: "All",
+              symbol: "📣",
+              color: .blue,
+              sounds: sounds.map(\.id))
+    }
 }
 
 struct Sound: Codable, Defaults.Serializable, Identifiable, Hashable {
