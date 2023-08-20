@@ -36,14 +36,20 @@ struct EditorView: View {
     init(title: String = "",
          symbol: String = "🚦",
          file: URL? = nil,
-         color: Color = .red,
+         color: Color? = nil,
          id: UUID = .init(),
          isExisting: Bool = false,
          boardID: UUID? = nil) {
         self._title = State(initialValue: title)
         self._symbol = State(initialValue: symbol)
         self._file = State(initialValue: file)
-        self._color = State(initialValue: color)
+        if let color {
+            self._color = State(initialValue: color)
+        } else if let boardID, let board = Defaults[.boards].first(where: { $0.id == boardID }) {
+            self._color = State(initialValue: board.color)
+        } else {
+            self._color = State(initialValue: .red)
+        }
         self._id = State(initialValue: id)
         self._isExisting = State(initialValue: isExisting)
         self.boardID = boardID

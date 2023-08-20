@@ -64,6 +64,7 @@
 		B3A8FD422A70FD9400357001 /* AudioBooster.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A8FD412A70FD9400357001 /* AudioBooster.swift */; };
 		B3A8FD442A71000500357001 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A8FD432A71000500357001 /* AudioPlayer.swift */; };
 		B3A8FD452A71032300357001 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3A8FD432A71000500357001 /* AudioPlayer.swift */; };
+		B3D270F72A92088D007D05A9 /* Fuse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D270F62A92088D007D05A9 /* Fuse.swift */; };
 		B3DD59DB2A6B046400314F4E /* SwiftUIReorderableForEach in Frameworks */ = {isa = PBXBuildFile; productRef = B3DD59DA2A6B046400314F4E /* SwiftUIReorderableForEach */; };
 		B3DD59DD2A6B070500314F4E /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DD59DC2A6B070500314F4E /* AudioRecorder.swift */; };
 /* End PBXBuildFile section */
@@ -164,6 +165,7 @@
 		B34C783F2A8FBE5F009A8BAA /* BoardEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardEntity.swift; sourceTree = "<group>"; };
 		B3A8FD412A70FD9400357001 /* AudioBooster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioBooster.swift; sourceTree = "<group>"; };
 		B3A8FD432A71000500357001 /* AudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
+		B3D270F62A92088D007D05A9 /* Fuse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fuse.swift; sourceTree = "<group>"; };
 		B3DD59DC2A6B070500314F4E /* AudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -322,6 +324,7 @@
 		B321932E2A3FACAD0050B011 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				B3D270F62A92088D007D05A9 /* Fuse.swift */,
 				B34C783D2A8FBE44009A8BAA /* Queue.swift */,
 				B32BF3432A38E7D3005BFA59 /* Alignment.swift */,
 				B32BF35D2A39891E005BFA59 /* AsyncButton.swift */,
@@ -517,6 +520,7 @@
 				B34C78402A8FBE5F009A8BAA /* BoardEntity.swift in Sources */,
 				B34C782F2A8F7AAE009A8BAA /* BoardEditor.swift in Sources */,
 				B34C78372A8FB1CF009A8BAA /* SoundButton.swift in Sources */,
+				B3D270F72A92088D007D05A9 /* Fuse.swift in Sources */,
 				B34C78312A8F8463009A8BAA /* Modify.swift in Sources */,
 				B30FD83D2A6E5A1800990160 /* ColorRow.swift in Sources */,
 				B30338E92A30D06300CEDD47 /* ContentView.swift in Sources */,

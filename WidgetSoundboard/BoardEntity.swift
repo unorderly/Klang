@@ -31,15 +31,11 @@ struct BoardEntity: AppEntity, Identifiable, Hashable {
     @Property(title: "Color")
     var color: String
 
-    @Property(title: "Sounds")
-    var sounds: [SoundEntity]
-
-    init(id: UUID, title: String, symbol: String, color: Color, sounds: [Sound]) {
+    init(id: UUID, title: String, symbol: String, color: Color) {
         self.id = id
         self.title = title
         self.symbol = symbol
         self.color = color.hex()
-        self.sounds = sounds.map({ SoundEntity(sound: $0) })
     }
 
     init(board: Board, allSounds: [Sound] = Defaults[.sounds]) {
@@ -47,9 +43,22 @@ struct BoardEntity: AppEntity, Identifiable, Hashable {
             id: board.id,
             title: board.title,
             symbol: board.symbol,
-            color: board.color,
-            sounds: board.sounds.compactMap({ id in allSounds.first(where: { $0.id == id }) })
+            color: board.color
         )
+    }
+
+    var board: Board? {
+        Defaults[.boards].first(where: { $0.id == self.id })
+    }
+
+    var sounds: [SoundEntity] {
+        if let board {
+            return board.sounds
+                .compactMap({ id in Defaults[.sounds].first(where: { $0.id == id }) })
+                .map(SoundEntity.init(sound:))
+        } else {
+            return []
+        }
     }
 
     static func == (lhs: BoardEntity, rhs: BoardEntity) -> Bool {

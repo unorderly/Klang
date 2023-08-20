@@ -27,11 +27,13 @@ struct ContentView: View {
 
     @State var preferredCompactColumn: NavigationSplitViewColumn = .sidebar
 
+    @ScaledMetric(relativeTo: .headline) var minimumWidth: CGFloat = 120
+
     var body: some View {
         NavigationSplitView(preferredCompactColumn: $preferredCompactColumn, sidebar: {
             ScrollView(.vertical) {
                 LazyVGrid(columns: [
-                    GridItem(.adaptive(minimum: 120), spacing: 16)
+                    GridItem(.adaptive(minimum: minimumWidth), spacing: 16)
                 ], spacing: 16) {
                     BoardButton(board: self.allBoard, isSelected: $selectedBoard.equals(self.allBoard))
                     ReorderableForEach($boards, allowReordering: .constant(true)) {

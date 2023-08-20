@@ -42,10 +42,12 @@ struct BoardView: View {
         })
     }
 
+    @ScaledMetric(relativeTo: .headline) var minimumWidth: CGFloat = 120
+
     var body: some View {
         ScrollView(.vertical) {
             LazyVGrid(columns: [
-                GridItem(.adaptive(minimum: 120), spacing: 16)
+                GridItem(.adaptive(minimum: minimumWidth), spacing: 16)
             ], spacing: 16) {
                 ReorderableForEach(soundsBinding, allowReordering: .constant(true)) {
                     sound,
@@ -61,20 +63,28 @@ struct BoardView: View {
         }
         .toolbar {
             ToolbarItem {
-                Menu(content: {
+                if self.boardID != Board.allID {
+                    Menu(content: {
+                        Button(action: {
+                            self.showCreateSheet = true
+                        }) {
+                            Label("New Sound", systemImage: "plus.circle.fill")
+                        }
+                        Button(action: {
+                            self.showAddSheet = true
+                        }) {
+                            Label("Add Existing Sound", systemImage: "doc.on.doc.fill")
+                        }
+                    }, label: {
+                        Label("Add Sound", systemImage: "plus")
+                    })
+                } else {
                     Button(action: {
-                        self.showAddSheet = true
+                        self.showCreateSheet = true
                     }) {
-                        Label("New Sound", systemImage: "plus.circle.fill")
+                        Label("New Sound", systemImage: "plus")
                     }
-                    Button(action: {
-                        self.showAddSheet = true
-                    }) {
-                        Label("Add Existing Sound", systemImage: "doc.on.doc.fill")
-                    }
-                }, label: {
-                    Label("Add Sound", systemImage: "plus")
-                })
+                }
             }
         }
         .sheet(isPresented: $showCreateSheet, content: {

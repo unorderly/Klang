@@ -41,17 +41,8 @@ struct SoundButton: View {
 
                 Spacer()
 
-                HStack {
-                    Text(sound.title)
-                    Spacer()
-                    Image(systemName: "speaker.wave.3.fill")
-                        .symbolEffect(.variableColor
-                            .cumulative
-                            .nonReversing,
-                                      options: .repeating,
-                                      isActive: self.player?.isPlaying ?? false)
-                        .opacity(self.player?.isPlaying ?? false ? 1 : 0)
-                }
+                Text(sound.title)
+                    .aligned(to: .leading)
                 .lineLimit(1)
                 .font(.headline)
                 .bold()
@@ -85,10 +76,17 @@ struct SoundButton: View {
                     Label("Delete Sound", systemImage: "trash")
                 }
             }, label: {
-                Image(systemName: "ellipsis.circle.fill")
+                Image(systemName: self.player?.isPlaying ?? false ? "speaker.wave.2.circle.fill" : "ellipsis.circle.fill")
+                    .contentTransition(.symbolEffect(.replace))
+                    .symbolEffect(.variableColor
+                        .cumulative
+                        .nonReversing,
+                                  options: .repeating,
+                                  isActive: self.player?.isPlaying ?? false)
                     .symbolRenderingMode(.hierarchical)
                     .imageScale(.large)
-                    .font(.headline)
+                    .font(.title2)
+                    .animation(.default, value: self.player?.isPlaying ?? false)
             })
             .menuStyle(.button)
             .buttonStyle(.borderless)

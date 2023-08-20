@@ -107,7 +107,6 @@ struct SoundWidgetEntryView<Entry: SoundboardTimelineEntry>: View {
 
     func rows(with numberOfRows: Int) -> [Row] {
         let columns = numberOfRows * self.widgetFamily.aspectRatio
-        print(sounds.count, numberOfRows, columns)
         let items = sounds.enumerated().map({ Item.sound($0.element, $0.offset) }).fillOrPrefix(to: columns * numberOfRows, using: Item.placeholder)
         return items.reduce([], { rows, sound in
             if let last = rows.last, last.count < columns {
@@ -129,14 +128,15 @@ struct SoundWidgetEntryView<Entry: SoundboardTimelineEntry>: View {
                 Text("Tap and hold the widget to add sounds")
             } else {
                 VStack {
-                    if let board = entry.board {
+                    if let board = entry.board?.board {
                         HStack {
                             Text(board.symbol)
                             Text(board.title)
                             Spacer()
                         }
-                        .font(.headline)
-                        Divider()
+                        .foregroundColor(board.color)
+                        .fontWeight(.semibold)
+                        .font(.subheadline)
                     }
                     ViewThatFits {
                         ForEach((1...self.maxRows).reversed(), id: \.self) { count in
