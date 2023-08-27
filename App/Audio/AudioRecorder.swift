@@ -141,6 +141,8 @@ extension AudioRecorder: AVAudioRecorderDelegate {
     }
     
     func audioRecorderEncodeErrorDidOccur(_ recorder: AVAudioRecorder, error: Error?) {
-        print(error)
+        if let error {
+            print(error)
+        }
     }
 }

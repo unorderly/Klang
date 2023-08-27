@@ -9,72 +9,6 @@ import WidgetKit
 import SwiftUI
 import Defaults
 
-struct SoundTimelineProvider: AppIntentTimelineProvider {
-    typealias Entry = SoundsEntry
-    typealias Intent = SoundsWidgetConfigIntent
-
-    func placeholder(in context: Context) -> Entry {
-        .init(date: Date(), config: .init())
-    }
-
-    func snapshot(for configuration: Intent, in context: Context) async -> Entry {
-        .init(date: Date(), config: configuration)
-    }
-
-    func timeline(for configuration: Intent, in context: Context) async -> Timeline<Entry> {
-        return Timeline(entries: [.init(date: .now, config: configuration)], policy: .never)
-    }
-}
-
-struct BoardTimelineProvider: AppIntentTimelineProvider {
-    typealias Entry = BoardEntry
-    typealias Intent = BoardWidgetConfigIntent
-
-    func placeholder(in context: Context) -> Entry {
-        .init(date: Date(), config: .init())
-    }
-
-    func snapshot(for configuration: Intent, in context: Context) async -> Entry {
-        .init(date: Date(), config: configuration)
-    }
-
-    func timeline(for configuration: Intent, in context: Context) async -> Timeline<Entry> {
-        return Timeline(entries: [.init(date: .now, config: configuration)], policy: .never)
-    }
-}
-
-
-struct SoundsEntry: SoundboardTimelineEntry {
-
-    var date: Date
-    let config: SoundsWidgetConfigIntent
-    var sounds: [SoundEntity] { config.sounds }
-
-    var isFullBlast: Bool { config.isFullBlast }
-    var board: BoardEntity? { nil }
-}
-
-struct BoardEntry: SoundboardTimelineEntry {
-    var date: Date
-    let config: BoardWidgetConfigIntent
-
-    var sounds: [SoundEntity] {
-        config.board?.sounds ?? []
-    }
-
-    var isFullBlast: Bool { config.isFullBlast }
-
-    var board: BoardEntity? { config.board }
-
-}
-
-protocol SoundboardTimelineEntry: TimelineEntry {
-
-    var sounds: [SoundEntity] { get }
-    var isFullBlast: Bool { get }
-    var board: BoardEntity? { get }
-}
-
 struct SoundWidgetEntryView<Entry: SoundboardTimelineEntry>: View {
     var entry: Entry
 
@@ -155,7 +89,6 @@ struct SoundWidgetEntryView<Entry: SoundboardTimelineEntry>: View {
                                                     }
                                                     .buttonBorderShape(.roundedRectangle)
                                                     .buttonStyle(.bordered)
-//                                                    .buttonStyle(.borderless)
                                                     .tint(Color(hex: sound.color) ?? .red)
                                                 case .placeholder:
                                                     Color.clear
@@ -209,60 +142,6 @@ extension WidgetFamily {
 
     func rows(for count: Int) -> Int {
         Int(ceil(sqrt(ceil(Double(count) / Double(aspectRatio)))))
-    }
-}
-
-struct SoundsWidget: Widget {
-    let kind: String = "app.klang.sounds_widget"
-
-    var body: some WidgetConfiguration {
-        AppIntentConfiguration(kind: kind, intent: SoundsWidgetConfigIntent.self, provider: SoundTimelineProvider()) { entry in
-            SoundWidgetEntryView(entry: entry)
-        }
-        .configurationDisplayName("Sounds")
-        .description("Choose from all your sounds")
-        .supportedFamilies([
-            .accessoryRectangular, .accessoryRectangular, .systemLarge, .systemSmall, .systemMedium, .systemExtraLarge
-        ])
-        .containerBackgroundRemovable()
-    }
-}
-
-
-struct BoardWidget: Widget {
-    let kind: String = "app.klang.board_widget"
-
-    var body: some WidgetConfiguration {
-        AppIntentConfiguration(kind: kind, intent: BoardWidgetConfigIntent.self, provider: BoardTimelineProvider()) { entry in
-            SoundWidgetEntryView(entry: entry)
-        }
-        .configurationDisplayName("Board")
-        .description("Select one of your boards and get its sounds in the widget")
-        .supportedFamilies([
-            .systemLarge, .systemSmall, .systemMedium, .systemExtraLarge
-        ])
-        .containerBackgroundRemovable()
-    }
-}
-
-extension SoundsEntry {
-    fileprivate static var defaultEntry: Self {
-        let intent = SoundsWidgetConfigIntent()
-        intent.sounds = Sound.default.map({ SoundEntity(sound: $0) })
-        return .init(date: .now, config: intent)
-    }
-
-    fileprivate static var empty: SoundsEntry {
-        let intent = SoundsWidgetConfigIntent()
-        return .init(date: .now, config: intent)
-    }
-}
-
-extension BoardEntry {
-    fileprivate static var defaultEntry: Self {
-        let intent = BoardWidgetConfigIntent()
-        intent.board = BoardEntity(board: .default.first!)
-        return .init(date: .now, config: intent)
     }
 }
 

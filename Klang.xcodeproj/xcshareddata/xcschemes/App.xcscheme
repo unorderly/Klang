@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B30338E22A30D06300CEDD47"
-               BuildableName = "WidgetSoundboard.app"
-               BlueprintName = "WidgetSoundboard"
-               ReferencedContainer = "container:WidgetSoundboard.xcodeproj">
+               BuildableName = "App.app"
+               BlueprintName = "App"
+               ReferencedContainer = "container:Klang.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,9 +35,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B30338F62A30D06300CEDD47"
-               BuildableName = "WidgetSoundboardTests.xctest"
-               BlueprintName = "WidgetSoundboardTests"
-               ReferencedContainer = "container:WidgetSoundboard.xcodeproj">
+               BuildableName = "Tests.xctest"
+               BlueprintName = "Tests"
+               ReferencedContainer = "container:Klang.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -46,9 +46,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B30339002A30D06400CEDD47"
-               BuildableName = "WidgetSoundboardUITests.xctest"
-               BlueprintName = "WidgetSoundboardUITests"
-               ReferencedContainer = "container:WidgetSoundboard.xcodeproj">
+               BuildableName = "UITests.xctest"
+               BlueprintName = "UITests"
+               ReferencedContainer = "container:Klang.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -68,9 +68,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B30338E22A30D06300CEDD47"
-            BuildableName = "WidgetSoundboard.app"
-            BlueprintName = "WidgetSoundboard"
-            ReferencedContainer = "container:WidgetSoundboard.xcodeproj">
+            BuildableName = "App.app"
+            BlueprintName = "App"
+            ReferencedContainer = "container:Klang.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -85,9 +85,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B30338E22A30D06300CEDD47"
-            BuildableName = "WidgetSoundboard.app"
-            BlueprintName = "WidgetSoundboard"
-            ReferencedContainer = "container:WidgetSoundboard.xcodeproj">
+            BuildableName = "App.app"
+            BlueprintName = "App"
+            ReferencedContainer = "container:Klang.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

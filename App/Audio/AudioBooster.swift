@@ -49,7 +49,7 @@ class AudioBooster {
 //                }
                 
                 let length = CMBlockBufferGetDataLength(blockBuffer)
-                var sampleBytes = UnsafeMutablePointer<Int16>.allocate(capacity: length)
+                let sampleBytes = UnsafeMutablePointer<Int16>.allocate(capacity: length)
                 defer { sampleBytes.deallocate() }
                 
                 CMBlockBufferCopyDataBytes(blockBuffer, atOffset: 0, dataLength: length, destination: sampleBytes)

@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  MainView.swift
 //  WidgetSoundboard
 //
 //  Created by Leo Mehlig on 07.06.23.
@@ -11,7 +11,7 @@ import WidgetKit
 import Defaults
 import SwiftUIReorderableForEach
 
-struct ContentView: View {
+struct MainView: View {
     @Default(.sounds) var sounds: [Sound]
     @Default(.boards) var boards: [Board]
 
@@ -87,5 +87,5 @@ extension Array {
 
 
 #Preview {
-    ContentView()
+    MainView()
 }
