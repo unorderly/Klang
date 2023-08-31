@@ -15,24 +15,11 @@ public extension UserDefaults {
     }()
 }
 
-extension Defaults.Keys {
-    static let sounds = Defaults.Key<[Sound]>("app_soundboard_sounds", suite: .kit) {
-        Sound.default.map { sound in
-            let newURL = FileManager.default
-                .containerURL(forSecurityApplicationGroupIdentifier: "group.io.unorderly.soundboard")!
-                .appending(component: sound.id.uuidString)
-                .appendingPathExtension(sound.url.pathExtension)
-            do {
-                try FileManager.default.removeItem(at: newURL)
-            } catch { }
-            try! FileManager.default.copyItem(at: sound.url, to: newURL)
-            return sound.set(\.url, to: newURL)
-        }
-    }
 
-    static let boards = Defaults.Key<[Board]>("app_soundboard_soundboards", suite: .kit) {
-        Board.default
-    }
+extension Defaults.Keys {
+    static let sounds = Defaults.Key<[Sound]>("app_soundboard_sounds", default: [], suite: .kit)
+
+    static let boards = Defaults.Key<[Board]>("app_soundboard_soundboards", default: [], suite: .kit)
 }
 
 struct Board: Codable, Defaults.Serializable, Identifiable, Hashable {
@@ -41,13 +28,15 @@ struct Board: Codable, Defaults.Serializable, Identifiable, Hashable {
     var symbol: String
     var color: Color
     var sounds: [UUID]
+    var galleryID: UUID?
 
-    init(id: UUID = .init(), title: String, symbol: String, color: Color, sounds: [UUID]) {
+    init(id: UUID = .init(), title: String, symbol: String, color: Color, sounds: [UUID], galleryID: UUID? = nil) {
         self.id = id
         self.title = title
         self.symbol = symbol
         self.color = color
         self.sounds = sounds
+        self.galleryID = galleryID
     }
 
     public func set<Value>(_ keyPath: WritableKeyPath<Self, Value>, to value: Value) -> Self {
@@ -55,14 +44,6 @@ struct Board: Codable, Defaults.Serializable, Identifiable, Hashable {
         object[keyPath: keyPath] = value
         return object
     }
-
-    static var `default`: [Board] = [
-        .init(id: UUID(uuidString: "052171A6-1018-4DAB-8E97-27A6DDFC0018")!,
-              title: "Klang",
-              symbol: "🔔",
-              color: .pink,
-              sounds: Sound.default.map(\.id))
-    ]
 
     static var allID: UUID {
         UUID(uuidString: "11111111-1111-1111-1111-111111111111")!
@@ -75,6 +56,22 @@ struct Board: Codable, Defaults.Serializable, Identifiable, Hashable {
               color: .blue,
               sounds: sounds.map(\.id))
     }
+
+    static let preview: Board = Board(id: .init(uuidString: "2f8b9a6d-4c3e-4f17-a9c2-7e12d7a5b8e1")!,
+                                      title: "Preview",
+                                      symbol: "🎛️",
+                                      color: .blue,
+                                      sounds: Sound.preview.map(\.id))
+
+    func delete(from boards: inout [Board], with sounds: inout [Sound], includeSounds: Bool) {
+        boards.removeAll(where: { $0.id == self.id })
+        if includeSounds {
+            let deletedSounds = self.sounds.filter({ sound in
+                !boards.contains(where: { $0.sounds.contains(sound) })
+            })
+            sounds.removeAll(where: { deletedSounds.contains($0.id) })
+        }
+    }
 }
 
 struct Sound: Codable, Defaults.Serializable, Identifiable, Hashable {
@@ -83,7 +80,7 @@ struct Sound: Codable, Defaults.Serializable, Identifiable, Hashable {
     var symbol: String
     var color: Color
     var url: URL
-    
+
     init(id: UUID = .init(), title: String, symbol: String, color: Color, url: URL) {
         self.id = id
         self.url = url
@@ -105,11 +102,22 @@ struct Sound: Codable, Defaults.Serializable, Identifiable, Hashable {
         object[keyPath: keyPath] = value
         return object
     }
-    
-    static var `default`: [Sound] = [
-        .init(id: UUID(uuidString: "052171A6-1008-4DF5-8E97-27A6CCFC0018")!, title: "Horse", symbol: "🐴", color: .brown, file: "horse.m4a"),
-        .init(id: UUID(uuidString: "5FAA1AC1-AF94-41ED-9038-2AE7C6AF1B62")!, title: "Seagulls", symbol: "🐦", color: .blue, file: "seagulls.caf"),
-        .init(id: UUID(uuidString: "F3827106-F450-412B-AD99-B9746A18B224")!, title: "Frog", symbol: "🐸", color: .green, file: "frog.caf"),
-        .init(id: UUID(uuidString: "EDE81226-88E1-4321-BC89-855B005D5063")!, title: "Wait", symbol: "🚦", color: .yellow, file: "wait.m4a"),
+
+    static let preview: [Sound] = [
+        Sound(id: .init(uuidString: "68397bc1-2866-4a27-a966-235bafe73f44")!,
+              title: "Toy",
+              symbol: "🪆",
+              color: .red,
+              file: "preview-toy.mp3"),
+        Sound(id: .init(uuidString: "d319d8c5-8261-4679-9d08-9a1a7e47ca8b")!,
+              title: "Toilet",
+              symbol: "🚽",
+              color: .blue,
+              file: "preview-toilet.mp3"),
+        Sound(id: .init(uuidString: "f8ed6679-2c32-4d05-a646-b608522d9873")!,
+              title: "Silly",
+              symbol: "🙃",
+              color: .orange,
+              file: "preview-silly.mp3")
     ]
 }

@@ -45,7 +45,6 @@ struct BoardEntry: SoundboardTimelineEntry {
 extension SoundsEntry {
     static var defaultEntry: Self {
         let intent = SoundsWidgetConfigIntent()
-        intent.sounds = Sound.default.map({ SoundEntity(sound: $0) })
         return .init(date: .now, config: intent)
     }
 
@@ -59,7 +58,6 @@ extension SoundsEntry {
 extension BoardEntry {
     static var defaultEntry: Self {
         let intent = BoardWidgetConfigIntent()
-        intent.board = BoardEntity(board: .default.first!)
         return .init(date: .now, config: intent)
     }
 }

@@ -7,7 +7,7 @@
 
 import WidgetKit
 import AppIntents
-
+import Defaults
 
 struct SoundsWidgetConfigIntent: WidgetConfigurationIntent {
     static var title: LocalizedStringResource = "Soundboard Widget Configration"
@@ -23,7 +23,7 @@ struct SoundsWidgetConfigIntent: WidgetConfigurationIntent {
                default: false)
     var isFullBlast: Bool
 
-    init(sounds: [SoundEntity] = Sound.default.map(SoundEntity.init(sound:)), isFullBlast: Bool) {
+    init(sounds: [SoundEntity] = SoundEntity.default, isFullBlast: Bool) {
         self.sounds = sounds
         self.isFullBlast = isFullBlast
     }
@@ -45,7 +45,7 @@ struct BoardWidgetConfigIntent: WidgetConfigurationIntent {
                default: false)
     var isFullBlast: Bool
 
-    init(board: BoardEntity? = BoardEntity(board: Board.default.first!), isFullBlast: Bool) {
+    init(board: BoardEntity? = .default, isFullBlast: Bool) {
         self.board = board
         self.isFullBlast = isFullBlast
     }

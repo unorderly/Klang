@@ -47,6 +47,14 @@ struct BoardEntity: AppEntity, Identifiable, Hashable {
         )
     }
 
+
+    static var `default`: BoardEntity? {
+        if let board = Defaults[.boards].first {
+            return BoardEntity(board: board)
+        }
+        return nil
+    }
+
     var board: Board? {
         Defaults[.boards].first(where: { $0.id == self.id })
     }

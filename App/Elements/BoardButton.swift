@@ -56,7 +56,7 @@ struct BoardButton: View {
 
 #Preview {
     PreviewState(false) { isSelected in
-        BoardButton(board: .default.first!, isSelected: isSelected)
+        BoardButton(board: .preview, isSelected: isSelected)
             .frame(maxWidth: 200)
     }
 }

@@ -101,7 +101,7 @@ struct SoundButton: View {
 }
 
 #Preview {
-    SoundButton(sound: .default.first!, isEditing: .constant(false), boardID: nil)
+    SoundButton(sound: .preview.first!, isEditing: .constant(false), boardID: nil)
         .frame(maxWidth: 200)
         .aligned(to: .all)
 }

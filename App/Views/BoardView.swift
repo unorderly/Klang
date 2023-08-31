@@ -19,6 +19,7 @@ struct BoardView: View {
     @State var editingSound: Sound?
 
     @State var showBoardEdit = false
+    @State var showDeleteAlert = false
 
     @Environment(\.dismiss) var dismiss
 
@@ -60,6 +61,13 @@ struct BoardView: View {
                 }
             }
             .padding()
+        }
+        .overlay {
+            if soundsBinding.wrappedValue.isEmpty {
+                ContentUnavailableView("No Sounds",
+                                       systemImage: "bell.slash.fill",
+                                       description: Text("This board is empty. Try adding some sounds."))
+            }
         }
         .toolbar {
             ToolbarItem {
@@ -115,12 +123,33 @@ struct BoardView: View {
                 }
 
                 Button(role: .destructive, action: {
-                    self.boards.removeAll(where: { $0.id == self.boardID })
+                    self.showDeleteAlert = true
                 }) {
                     Label("Delete Board", systemImage: "trash")
                 }
             })
         }
+        .alert("Do you also want to delete the sounds in this board?",
+               isPresented: $showDeleteAlert,
+               actions: {
+            Button(role: .destructive, action: {
+                self.board?.delete(from: &self.boards, with: &self.sounds, includeSounds: false)
+            }) {
+                Text("Just Board")
+            }
+
+            Button(role: .destructive, action: {
+                self.board?.delete(from: &self.boards, with: &self.sounds, includeSounds: true)
+            }) {
+                Text("Board & Sounds")
+            }
+
+            Button(role: .cancel, action: { }) {
+                Text("Cancel")
+            }
+        }, message: {
+            Text("Only sounds, which are not used in any other boards will be deleted.")
+        })
         .navigationTitle(Text("\(board?.symbol ?? "") \(board?.title ?? "")"))
         .navigationBarTitleDisplayMode(.inline)
     }
@@ -128,5 +157,7 @@ struct BoardView: View {
 
 
 #Preview {
-    BoardView(boardID: Board.allID)
+    NavigationStack {
+        BoardView(boardID: Board.allID)
+    }
 }

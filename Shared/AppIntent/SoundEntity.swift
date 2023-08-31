@@ -52,6 +52,9 @@ struct SoundEntity: AppEntity, Identifiable, Hashable {
         )
     }
 
+    static var `default`: [SoundEntity] {
+        Defaults[.sounds].prefix(4).map(SoundEntity.init(sound:))
+    }
     static func == (lhs: SoundEntity, rhs: SoundEntity) -> Bool {
         lhs.id == rhs.id
     }

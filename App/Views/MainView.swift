@@ -24,6 +24,7 @@ struct MainView: View {
 
     @State var selectedBoard: Board?
     @State var showAddSheet = false
+    @State var showGallery = false
 
     @State var preferredCompactColumn: NavigationSplitViewColumn = .sidebar
 
@@ -62,8 +63,20 @@ struct MainView: View {
                 BoardEditor()
             })
             .navigationTitle(Text("Soundboards"))
+            .toolbar {
+                ToolbarItem {
+                    Button(action: {
+                        self.showGallery = true
+                    }) {
+                        Label("Gallery", systemImage: "sparkles.rectangle.stack")
+                    }
+                }
+            }
         }, detail: {
             Text("Select a board")
+        })
+        .sheet(isPresented: $showGallery, content: {
+            GalleryView()
         })
         .onChange(of: scenePhase) { _, phase in
             if phase == .background {
