@@ -73,7 +73,7 @@ class AudioRecorder: NSObject {
     func setupRecorder() {
         let recordingSession = AVAudioSession.sharedInstance()
         do {
-            try recordingSession.setCategory(.playAndRecord, mode: .default)
+            try recordingSession.setCategory(.record, mode: .default)
             try recordingSession.setActive(true)
         } catch {
             print("Failed to set up recording session")
@@ -103,11 +103,15 @@ class AudioRecorder: NSObject {
     var levelTask: Task<Void, Never>?
        
     func stopRecording() {
-        self.audioRecorder?.stop()
+        if self.audioRecorder?.isRecording ?? false {
+            self.audioRecorder?.stop()
+        }
+        try? AVAudioSession.sharedInstance().setActive(false)
         self.levelTask?.cancel()
     }
     
     func startRecording() async {
+        await AudioPlayer.cancelQueue()
         self.setupRecorder()
         await AVAudioApplication.requestRecordPermission()
         self.audioRecorder?.record()
@@ -135,6 +139,7 @@ extension AudioRecorder: AVAudioRecorderDelegate {
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
         self.isRecording = false
         self.levelTask?.cancel()
+        self.stopRecording()
         if flag {
             self.url = recorder.url
         }
@@ -144,5 +149,6 @@ extension AudioRecorder: AVAudioRecorderDelegate {
         if let error {
             print(error)
         }
+        self.stopRecording()
     }
 }

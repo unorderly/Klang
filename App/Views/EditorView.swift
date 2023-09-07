@@ -110,11 +110,11 @@ struct EditorView: View {
                                 Button(action: {
                                     let audioPlayer = try! self.audioPlayer ?? AudioPlayer(url: url)
                                     self.audioPlayer = audioPlayer
-                                    if audioPlayer.player.isPlaying {
+                                    if audioPlayer.isPlaying {
                                         audioPlayer.stop()
                                     } else {
                                         Task {
-                                            await audioPlayer.play()
+                                            try await audioPlayer.playOnQueue()
                                         }
                                     }
                                 }) {
@@ -206,7 +206,10 @@ struct EditorView: View {
                             .onChange(of: self.photoItem) { _, item in
                                 Task {
                                     if let item {
-                                        let audio = try! await item.loadTransferable(type: VideoToAudio.self)!
+                                        print(item.supportedContentTypes)
+                                        guard let audio = try! await item.loadTransferable(type: VideoToAudio.self) else {
+                                            return
+                                        }
                                         let newPath = FileManager.default
                                             .containerURL(forSecurityApplicationGroupIdentifier: "group.io.unorderly.soundboard")!
                                             .appending(component: "\(self.id.uuidString)_\(UUID().uuidString)")
@@ -330,6 +333,15 @@ struct VideoToAudio: Transferable {
                 .containerURL(forSecurityApplicationGroupIdentifier: "group.io.unorderly.soundboard")!
                 .appending(component: "\(UUID().uuidString)")
                 .appendingPathExtension("mov")
+            try FileManager.default.copyItem(at: received.file, to: copy)
+            return Self.init(url: copy)
+        }
+        FileRepresentation(importedContentType: .mpeg4Movie) { received in
+            print(received)
+            let copy = FileManager.default
+                .containerURL(forSecurityApplicationGroupIdentifier: "group.io.unorderly.soundboard")!
+                .appending(component: "\(UUID().uuidString)")
+                .appendingPathExtension("mp4")
             try FileManager.default.copyItem(at: received.file, to: copy)
             return Self.init(url: copy)
         }

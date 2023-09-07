@@ -31,14 +31,14 @@ final class AudioPlayer: NSObject, AVAudioPlayerDelegate {
     }
     
     static let queue = ConcurrentQueue(setup: { try AudioPlayer.activate() }, teardown: { try AudioPlayer.deactivate() })
-    
+
     static func activate() throws {
-        try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [.mixWithOthers, .duckOthers])
+        try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [])
         try AVAudioSession.sharedInstance().setActive(true)
     }
     
     static func deactivate() throws {
-        try AVAudioSession.sharedInstance().setActive(false)
+        try AVAudioSession.sharedInstance().setActive(false, options: [.notifyOthersOnDeactivation])
     }
     
     var isOnSpeaker: Bool {
@@ -50,8 +50,12 @@ final class AudioPlayer: NSObject, AVAudioPlayerDelegate {
             await self.play()
         }
     }
-    
-    func play() async {
+
+    static func cancelQueue() async {
+        await self.queue.cancelAll()
+    }
+
+    private func play() async {
         self.playingTask?.cancel()
         self.playingTask = Task { [weak self] in
             self?.progressTask = Task.detached(priority: .utility) { [weak self] in
@@ -71,8 +75,11 @@ final class AudioPlayer: NSObject, AVAudioPlayerDelegate {
             await withTaskCancellationHandler {
                 self?.isPlaying = true
                 await withCheckedContinuation { continuation in
-                    self?.continuation = continuation
-                    self?.player.play()
+                    guard let self else { return }
+                    self.continuation = continuation
+                    if !self.player.play() {
+                        self.continuation?.resume()
+                    }
                 }
                 self?.isPlaying = false
             } onCancel: { [weak self] in
@@ -95,6 +102,12 @@ final class AudioPlayer: NSObject, AVAudioPlayerDelegate {
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         self.continuation?.resume()
     }
+
+    func audioPlayerDecodeErrorDidOccur(_ player: AVAudioPlayer, error: Error?) {
+        self.continuation?.resume()
+    }
+
+
 }
 
 extension MPVolumeView {

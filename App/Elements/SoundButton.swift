@@ -28,7 +28,7 @@ struct SoundButton: View {
                 audioPlayer.stop()
             } else {
                 Task {
-                    await audioPlayer.play()
+                    try await audioPlayer.playOnQueue()
                 }
             }
         }) {
