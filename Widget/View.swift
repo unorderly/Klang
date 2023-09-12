@@ -9,6 +9,70 @@ import WidgetKit
 import SwiftUI
 import Defaults
 
+struct SoundWidgetEmptyView: View {
+    @Environment(\.widgetFamily) var widgetFamily
+
+    var colors: [Color] {
+        [.red, .blue, .green, .indigo, .mint, .orange, .pink, .purple, .teal, .yellow]
+    }
+
+    var rows: Int {
+        switch widgetFamily {
+        case .accessoryCircular, .accessoryRectangular:
+            return 1
+        case .systemSmall, .systemMedium:
+            return 2
+        case .systemLarge, .systemExtraLarge:
+            return 4
+        default:
+            return 0
+        }
+    }
+    var body: some View {
+        ZStack {
+            VStack(spacing: 12) {
+                ForEach(Array(0..<self.rows), id: \.self) { _ in
+                    HStack(spacing: 12) {
+                        ForEach(Array(0..<(self.rows * widgetFamily.aspectRatio)), id: \.self) { _ in
+                            ContainerRelativeShape()
+                                .foregroundStyle(self.colors.randomElement()!)
+                                .opacity(0.3)
+                        }
+                    }
+                }
+            }
+            .blur(radius: 5.0)
+
+            switch widgetFamily {
+            case .systemSmall, .systemMedium, .systemLarge, .systemExtraLarge:
+                VStack(spacing: 8) {
+                    Image(systemName: "info.circle.fill")
+                        .font(.headline)
+                        .imageScale(.large)
+                        .symbolRenderingMode(.hierarchical)
+                    Label("Press and Hold to Edit Widget", systemImage: "info.circle")
+                        .font(.subheadline.weight(.semibold))
+                        .labelStyle(.titleOnly)
+                        .multilineTextAlignment(.center)
+                }
+            case .accessoryRectangular:
+                Label("Setup Widget", systemImage: "info.circle.fill")
+                    .font(.headline)
+                    .imageScale(.large)
+                    .symbolRenderingMode(.hierarchical)
+            case .accessoryCircular:
+                Image(systemName: "info.circle.fill")
+                    .font(.headline)
+                    .imageScale(.large)
+                    .symbolRenderingMode(.hierarchical)
+            default: EmptyView()
+            }
+
+        }
+        .widgetURL(URL(string: "klang://setup-widget")!)
+    }
+}
+
 struct SoundWidgetEntryView<Entry: SoundboardTimelineEntry>: View {
     var entry: Entry
 
@@ -56,10 +120,11 @@ struct SoundWidgetEntryView<Entry: SoundboardTimelineEntry>: View {
     }
 
     @ScaledMetric(relativeTo: .title2) var size: CGFloat = 30
+
     var body: some View {
         Group {
             if sounds.isEmpty {
-                Text("Tap and hold the widget to add sounds")
+                SoundWidgetEmptyView()
             } else {
                 VStack {
                     if let board = entry.board?.board {
@@ -156,6 +221,13 @@ extension WidgetFamily {
 } timeline: {
     BoardEntry.defaultEntry
 }
+
+#Preview("Empty-Small", as: .systemSmall) {
+    SoundsWidget()
+} timeline: {
+    SoundsEntry.empty
+}
+
 
 #Preview(as: .systemMedium) {
     SoundsWidget()

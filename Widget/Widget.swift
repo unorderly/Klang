@@ -18,7 +18,7 @@ struct SoundsWidget: Widget {
         .configurationDisplayName("Sounds")
         .description("Choose from all your sounds")
         .supportedFamilies([
-            .accessoryRectangular, .accessoryRectangular, .systemLarge, .systemSmall, .systemMedium, .systemExtraLarge
+            .accessoryRectangular, .accessoryCircular, .systemSmall, .systemMedium, .systemLarge, .systemExtraLarge
         ])
         .containerBackgroundRemovable()
     }
@@ -35,7 +35,7 @@ struct BoardWidget: Widget {
         .configurationDisplayName("Board")
         .description("Select one of your boards and get its sounds in the widget")
         .supportedFamilies([
-            .systemLarge, .systemSmall, .systemMedium, .systemExtraLarge
+            .systemSmall, .systemMedium, .systemLarge, .systemExtraLarge
         ])
         .containerBackgroundRemovable()
     }

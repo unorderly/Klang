@@ -133,6 +133,7 @@ struct EditorView: View {
                             }
                             .tint(.blue)
                             
+                            /*
                             Spacer()
                             
                             VStack(alignment: .center, spacing: 8) {
@@ -153,7 +154,8 @@ struct EditorView: View {
                             }
                             .tint(.yellow)
                             .disabled(true)
-                            
+                            */
+
                             Spacer()
                             
                             VStack(alignment: .center, spacing: 8) {

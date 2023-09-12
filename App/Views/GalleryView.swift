@@ -165,7 +165,6 @@ struct GallerySoundButton: View {
                 }) {
                     Label("Add Sound", systemImage: "plus.circle.fill")
                 }
-                .disabled(true)
 
                 Section(content: {
                     Button(action: {
