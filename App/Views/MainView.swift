@@ -31,7 +31,7 @@ struct MainView: View {
 
     @State var preferredCompactColumn: NavigationSplitViewColumn = .sidebar
 
-    @ScaledMetric(relativeTo: .headline) var minimumWidth: CGFloat = 120
+    @ScaledMetric(relativeTo: .headline) var minimumWidth: CGFloat = 130
 
     var body: some View {
         NavigationSplitView(preferredCompactColumn: $preferredCompactColumn, sidebar: {
@@ -54,6 +54,8 @@ struct MainView: View {
                         self.showGallery = true
                     }) {
                         Label("Find more soundboards in the Gallery", systemImage: "sparkles.rectangle.stack")
+                            .aligned(to: .horizontal)
+                            .frame(maxWidth: 400)
                     }
                     .buttonStyle(.bordered)
                     .font(.headline)
@@ -72,7 +74,7 @@ struct MainView: View {
                     Button(action: {
                         self.showGallery = true
                     }) {
-                        Label("Gallery", systemImage: "sparkles.rectangle.stack.fill")
+                        Label("Gallery", systemImage: "sparkles.rectangle.stack")
                     }
                 }
 

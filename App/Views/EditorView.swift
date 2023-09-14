@@ -208,7 +208,6 @@ struct EditorView: View {
                             .onChange(of: self.photoItem) { _, item in
                                 Task {
                                     if let item {
-                                        print(item.supportedContentTypes)
                                         guard let audio = try! await item.loadTransferable(type: VideoToAudio.self) else {
                                             return
                                         }
