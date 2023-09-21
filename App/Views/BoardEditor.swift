@@ -108,6 +108,7 @@ struct BoardEditor: View {
                               sounds: self.sounds)
             Defaults[.boards].upsert(board, by: \.id)
             self.dismiss()
+            Defaults[.signals] += 1
         }
         .font(.headline)
         .disabled(self.title.isEmpty)

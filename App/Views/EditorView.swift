@@ -319,6 +319,7 @@ struct EditorView: View {
                 Defaults[.boards].upsert(board, by: \.id)
             }
             self.dismiss()
+            Defaults[.signals] += 1
         }
         .font(.headline)
         .disabled(self.file == nil || self.title.isEmpty)

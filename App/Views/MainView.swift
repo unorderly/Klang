@@ -10,17 +10,23 @@ import SwiftData
 import WidgetKit
 import Defaults
 import SwiftUIReorderableForEach
+import StoreKit
+
+extension Defaults.Keys {
+    static let signals = Defaults.Key<Int>("app_soundboard_signals", default: 0, suite: .kit)
+}
 
 struct MainView: View {
     @Default(.sounds) var sounds: [Sound]
     @Default(.boards) var boards: [Board]
+    @Default(.signals) var signals: Int
 
     var allBoard: Board {
         Board.allBoard(with: sounds)
     }
 
     @Environment(\.scenePhase) var scenePhase
-    
+    @Environment(\.requestReview) var requestReview
 
     @State var selectedBoard: Board?
     @State var showAddSheet = false
@@ -128,12 +134,29 @@ struct MainView: View {
                 self.showWidgetSetup = true
             }
         })
+        .onChange(of: signals.isFibonacci, initial: false) { _, showDialog in
+            if showDialog {
+                self.requestReview()
+            }
+        }
         .onAppear {
             if sounds.isEmpty {
                 GalleryBoard.animals.save()
             }
         }
 
+    }
+}
+
+extension Int {
+    var isFibonacci: Bool {
+        (5 * self * self + 4).isPerfectSquare
+            || (5 * self * self - 4).isPerfectSquare
+    }
+
+    var isPerfectSquare: Bool {
+        let root = Int(sqrt(Double(self)))
+        return root * root == self
     }
 }
 
