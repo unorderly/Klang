@@ -84,7 +84,7 @@ struct GalleryBoardView: View {
                     self.board.save()
                 }
             }) {
-                Label("Add Board", systemImage: "plus.circle.fill")
+                Label(self.isInstalled ? "Added" : "Add Board", systemImage: self.isInstalled ? "checkmark.circle.fill" : "plus.circle.fill")
                     .font(.headline)
                     .aligned(to: .horizontal)
             }
