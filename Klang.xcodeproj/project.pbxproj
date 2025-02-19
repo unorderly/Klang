@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3699CA772D65DB92007183D1 /* MP3File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3699CA762D65DB85007183D1 /* MP3File.swift */; };
 		B30338E72A30D06300CEDD47 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30338E62A30D06300CEDD47 /* App.swift */; };
 		B30338E92A30D06300CEDD47 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30338E82A30D06300CEDD47 /* MainView.swift */; };
 		B30338EB2A30D06300CEDD47 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B30338EA2A30D06300CEDD47 /* Assets.xcassets */; };
@@ -122,6 +123,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3699CA762D65DB85007183D1 /* MP3File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MP3File.swift; sourceTree = "<group>"; };
 		B30338E32A30D06300CEDD47 /* App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = App.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B30338E62A30D06300CEDD47 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		B30338E82A30D06300CEDD47 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -367,6 +369,7 @@
 		B3D3BE122A9B40F700D7C077 /* Audio */ = {
 			isa = PBXGroup;
 			children = (
+				3699CA762D65DB85007183D1 /* MP3File.swift */,
 				B3A8FD432A71000500357001 /* AudioPlayer.swift */,
 				B3DD59DC2A6B070500314F4E /* AudioRecorder.swift */,
 				B3A8FD412A70FD9400357001 /* AudioBooster.swift */,
@@ -596,6 +599,7 @@
 				B3D270F72A92088D007D05A9 /* Fuse.swift in Sources */,
 				B34C78312A8F8463009A8BAA /* Modify.swift in Sources */,
 				B3D6E04A2AA0F0EF0078A6A9 /* GallerySound.swift in Sources */,
+				3699CA772D65DB92007183D1 /* MP3File.swift in Sources */,
 				B30FD83D2A6E5A1800990160 /* ColorRow.swift in Sources */,
 				B30338E92A30D06300CEDD47 /* MainView.swift in Sources */,
 				B3D6E0092AA09A8C0078A6A9 /* GalleryView.swift in Sources */,

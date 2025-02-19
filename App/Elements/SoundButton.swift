@@ -19,6 +19,7 @@ struct SoundButton: View {
     @ScaledMetric(relativeTo: .title2) private var itemSize: CGFloat = 100
 
     @State private var player: AudioPlayer?
+    @State private var showingExporter = false
 
     var body: some View {
         Button(action: {
@@ -57,6 +58,11 @@ struct SoundButton: View {
                     self.isEditing = true
                 }) {
                     Label("Edit Sound", systemImage: "pencil")
+                }
+                Button(action: {
+                    showingExporter = true
+                }) {
+                    Label("Export Sound", systemImage: "square.and.arrow.up")
                 }
                 if var board = Defaults[.boards].first(where: { $0.id == self.boardID }) {
                     Button(role: .destructive, action: {
@@ -97,6 +103,14 @@ struct SoundButton: View {
         .buttonStyle(.bordered)
         .tint(sound.color)
         .animation(.default, value: self.player?.isPlaying ?? false)
+        .fileExporter(isPresented: $showingExporter, document: MP3File(fileURL: sound.url), contentType: .mp3) { result in
+            switch result {
+            case .success(let url):
+                print("Saved to \(url)")
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
 }
 
