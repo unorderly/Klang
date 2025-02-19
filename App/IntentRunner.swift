@@ -11,15 +11,15 @@ import UIKit
 import MediaPlayer
 
 enum IntentRunner {
-    private static var currentPlayer: AudioPlayer?
-    private static var currentSoundTitle: String?
+    private static var activePlayer: [String: AudioPlayer] = [:]
 
     static func perform(intent: SoundIntent) async throws -> some IntentResult {
-        if let player = currentPlayer, player.isPlaying, currentSoundTitle == intent.sound.title {
+        let soundTitle = intent.sound.title
+
+        if let player = activePlayer[soundTitle], player.isPlaying {
             print("Stopping sound \(intent.sound.title)")
             player.stop()
-            currentPlayer = nil
-            currentSoundTitle = nil
+            activePlayer[soundTitle] = nil
             return .result()
         }
 
@@ -32,22 +32,17 @@ enum IntentRunner {
             await MPVolumeView.setVolume(1)
         }
 
-        currentPlayer = newPlayer
-        currentSoundTitle = intent.sound.title
+        activePlayer[soundTitle] = newPlayer
 
         do {
             print("Playing sound \(intent.sound.title)")
             try await newPlayer.playOnQueue()
             print("Sound \(intent.sound.title) stopped")
 
-            if currentSoundTitle == intent.sound.title {
-                currentPlayer = nil
-                currentSoundTitle = nil
-            }
+            activePlayer[intent.sound.title] = nil
         } catch {
             print("Playing Sound failed error:", error.localizedDescription)
-            currentPlayer = nil
-            currentSoundTitle = nil
+            activePlayer[intent.sound.title] = nil
         }
         return .result()
     }
