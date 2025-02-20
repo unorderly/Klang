@@ -20,6 +20,7 @@ struct BoardView: View {
 
     @State var showBoardEdit = false
     @State var showDeleteAlert = false
+    @State private var showImporter = false
 
     @Environment(\.dismiss) var dismiss
 
@@ -83,6 +84,12 @@ struct BoardView: View {
                         }) {
                             Label("Add Existing Sound", systemImage: "doc.on.doc.fill")
                         }
+                        Button(action: {
+                            showImporter = true
+                            print("showImporter: \(showImporter)")
+                        }) {
+                            Label("Import Sound", systemImage: "square.and.arrow.down.fill")
+                        }
                     }, label: {
                         Label("Add Sound", systemImage: "plus")
                     })
@@ -112,6 +119,17 @@ struct BoardView: View {
         .onChange(of: self.board != nil) { _, hasBoard in
             if !hasBoard {
                 self.dismiss()
+            }
+        }
+        .fileImporter(
+            isPresented: $showImporter,
+            allowedContentTypes: [.mp3]
+        ) { result in
+            switch result {
+            case .success(let file):
+                print("Imported: \(file.absoluteString)")
+            case .failure(let error):
+                print(error.localizedDescription)
             }
         }
         .if(self.boardID != Board.allID) { content in
