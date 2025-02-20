@@ -126,16 +126,30 @@ struct BoardView: View {
             allowedContentTypes: [.mp3]
         ) { result in
             switch result {
-            case .success(let file):
-                print("Imported: \(file.absoluteString)")
-                print("file type: \(type(of: file))")
-                let newSound = Sound(id: UUID(), title: "Imported Sound", symbol: "🚦", color: .blue, url: file)
-                Defaults[.sounds].upsert(newSound, by: \.id)
+            case .success(let url):
+                print("Imported: \(url.absoluteString)")
+                print("file type: \(type(of: url))")
 
-                if let boardID = self.board?.id, var board = Defaults[.boards].first(where: { $0.id == boardID }) {
-                    board.sounds.append(newSound.id)
-                    Defaults[.boards].upsert(board, by: \.id)
+                let gotAccess = url.startAccessingSecurityScopedResource()
+                if !gotAccess { return }
+
+                let tempURL = FileManager.default.temporaryDirectory.appendingPathComponent(url.lastPathComponent)
+
+                do {
+                    try FileManager.default.copyItem(at: url, to: tempURL)
+
+                    let newSound = Sound(id: UUID(), title: "Imported Sound", symbol: "🚦", color: .orange, url: tempURL)
+                    Defaults[.sounds].upsert(newSound, by: \.id)
+
+                    if let boardID = self.board?.id, var board = Defaults[.boards].first(where: { $0.id == boardID }) {
+                        board.sounds.append(newSound.id)
+                        Defaults[.boards].upsert(board, by: \.id)
+                    }
+                } catch {
+                    print("Error moving file: \(error.localizedDescription)")
                 }
+                
+                url.stopAccessingSecurityScopedResource()
             case .failure(let error):
                 print(error.localizedDescription)
             }
