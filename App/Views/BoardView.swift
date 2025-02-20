@@ -128,6 +128,14 @@ struct BoardView: View {
             switch result {
             case .success(let file):
                 print("Imported: \(file.absoluteString)")
+                print("file type: \(type(of: file))")
+                let newSound = Sound(id: UUID(), title: "Imported Sound", symbol: "🚦", color: .blue, url: file)
+                Defaults[.sounds].upsert(newSound, by: \.id)
+
+                if let boardID = self.board?.id, var board = Defaults[.boards].first(where: { $0.id == boardID }) {
+                    board.sounds.append(newSound.id)
+                    Defaults[.boards].upsert(board, by: \.id)
+                }
             case .failure(let error):
                 print(error.localizedDescription)
             }
