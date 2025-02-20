@@ -127,13 +127,11 @@ struct BoardView: View {
         ) { result in
             switch result {
             case .success(let url):
-                print("Imported: \(url.absoluteString)")
-                print("file type: \(type(of: url))")
-
                 let gotAccess = url.startAccessingSecurityScopedResource()
                 if !gotAccess { return }
 
                 let tempURL = FileManager.default.temporaryDirectory.appendingPathComponent(url.lastPathComponent)
+                FileManager.default.deleteIfExists(at: tempURL)
 
                 do {
                     try FileManager.default.copyItem(at: url, to: tempURL)
@@ -195,6 +193,13 @@ struct BoardView: View {
     }
 }
 
+extension FileManager {
+    func deleteIfExists(at url: URL) {
+        if self.fileExists(atPath: url.path) {
+            try? self.removeItem(at: url)
+        }
+    }
+}
 
 #Preview {
     NavigationStack {
