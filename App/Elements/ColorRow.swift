@@ -31,6 +31,7 @@ public struct ColorRow: View {
     @State private var size: CGSize = .init(width: 22, height: 22)
 
     @State private var custom: Color = .clear
+    @State private var selectedColor: Color = .clear
 
     public var body: some View {
         HStack(spacing: 0) {
@@ -46,10 +47,15 @@ public struct ColorRow: View {
                 }
             }
 
-           
             ColorPicker("Color Picker",
-                        selection: $custom,
+                        selection: $selectedColor,
                         supportsOpacity: false)
+            .onChange(of: selectedColor) {
+                custom = selectedColor
+            }
+            .onAppear {
+                selectedColor = custom
+            }
             .accessibilityAddTraits(!self.colors.contains(self.selected) ? .isSelected : [])
             .labelsHidden()
             .background(GeometryReader {
