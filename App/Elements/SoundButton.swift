@@ -22,14 +22,22 @@ struct SoundButton: View {
 
     var body: some View {
         Button(action: {
-            let audioPlayer = try! self.player ?? AudioPlayer(url: sound.url)
-            self.player = audioPlayer
-            if audioPlayer.player.isPlaying {
-                audioPlayer.stop()
-            } else {
-                Task {
-                    try await audioPlayer.playOnQueue()
+            do {
+                if self.player == nil {
+                    self.player = try AudioPlayer(url: sound.url)
                 }
+
+                guard let audioPlayer = self.player else { return }
+
+                if audioPlayer.isPlaying {
+                    audioPlayer.stop()
+                } else {
+                    Task {
+                        try await audioPlayer.playOnQueue()
+                    }
+                }
+            } catch {
+                print("Error with AudioPlayer: \(error.localizedDescription)")
             }
         }) {
             VStack(spacing: 8) {
