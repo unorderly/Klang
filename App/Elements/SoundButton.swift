@@ -62,7 +62,10 @@ struct SoundButton: View {
                 Button(action: {
                     showingExporter = true
                 }) {
-                    Label("Export Sound", systemImage: "square.and.arrow.up")
+                    Label("Export to Files", systemImage: "square.and.arrow.up")
+                }
+                ShareLink(item: sound.url) {
+                    Label("Share Sound", systemImage: "square.and.arrow.up")
                 }
                 if var board = Defaults[.boards].first(where: { $0.id == self.boardID }) {
                     Button(role: .destructive, action: {
