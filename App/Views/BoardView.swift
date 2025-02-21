@@ -123,31 +123,34 @@ struct BoardView: View {
         }
         .fileImporter(
             isPresented: $showImporter,
-            allowedContentTypes: [.mp3]
+            allowedContentTypes: [.mp3],
+            allowsMultipleSelection: true
         ) { result in
             switch result {
-            case .success(let url):
-                let gotAccess = url.startAccessingSecurityScopedResource()
-                if !gotAccess { return }
+            case .success(let urls):
+                for url in urls {
+                    let gotAccess = url.startAccessingSecurityScopedResource()
+                    if !gotAccess { return }
 
-                let tempURL = FileManager.default.temporaryDirectory.appendingPathComponent(url.lastPathComponent)
-                FileManager.default.deleteIfExists(at: tempURL)
+                    let tempURL = FileManager.default.temporaryDirectory.appendingPathComponent(url.lastPathComponent)
+                    FileManager.default.deleteIfExists(at: tempURL)
 
-                do {
-                    try FileManager.default.copyItem(at: url, to: tempURL)
+                    do {
+                        try FileManager.default.copyItem(at: url, to: tempURL)
 
-                    let newSound = Sound(id: UUID(), title: "Imported Sound", symbol: "🚦", color: .orange, url: tempURL)
-                    Defaults[.sounds].upsert(newSound, by: \.id)
+                        let newSound = Sound(id: UUID(), title: "Imported Sound", symbol: "🚦", color: .orange, url: tempURL)
+                        Defaults[.sounds].upsert(newSound, by: \.id)
 
-                    if let boardID = self.board?.id, var board = Defaults[.boards].first(where: { $0.id == boardID }) {
-                        board.sounds.append(newSound.id)
-                        Defaults[.boards].upsert(board, by: \.id)
+                        if let boardID = self.board?.id, var board = Defaults[.boards].first(where: { $0.id == boardID }) {
+                            board.sounds.append(newSound.id)
+                            Defaults[.boards].upsert(board, by: \.id)
+                        }
+                    } catch {
+                        print("Error moving file: \(error.localizedDescription)")
                     }
-                } catch {
-                    print("Error moving file: \(error.localizedDescription)")
+                    
+                    url.stopAccessingSecurityScopedResource()
                 }
-                
-                url.stopAccessingSecurityScopedResource()
             case .failure(let error):
                 print(error.localizedDescription)
             }
