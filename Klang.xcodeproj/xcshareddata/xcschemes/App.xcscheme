@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "B30338E22A30D06300CEDD47"
-               BuildableName = "App.app"
-               BlueprintName = "App"
+               BuildableName = "KlangApp.app"
+               BlueprintName = "KlangApp"
                ReferencedContainer = "container:Klang.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -68,8 +68,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B30338E22A30D06300CEDD47"
-            BuildableName = "App.app"
-            BlueprintName = "App"
+            BuildableName = "KlangApp.app"
+            BlueprintName = "KlangApp"
             ReferencedContainer = "container:Klang.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -85,8 +85,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "B30338E22A30D06300CEDD47"
-            BuildableName = "App.app"
-            BlueprintName = "App"
+            BuildableName = "KlangApp.app"
+            BlueprintName = "KlangApp"
             ReferencedContainer = "container:Klang.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

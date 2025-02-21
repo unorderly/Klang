@@ -122,7 +122,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		B30338E32A30D06300CEDD47 /* App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = App.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B30338E32A30D06300CEDD47 /* KlangApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KlangApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B30338E62A30D06300CEDD47 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		B30338E82A30D06300CEDD47 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		B30338EA2A30D06300CEDD47 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -235,7 +235,7 @@
 		B30338E42A30D06300CEDD47 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B30338E32A30D06300CEDD47 /* App.app */,
+				B30338E32A30D06300CEDD47 /* KlangApp.app */,
 				B30338F72A30D06300CEDD47 /* Tests.xctest */,
 				B30339012A30D06400CEDD47 /* UITests.xctest */,
 				B303393A2A30D34D00CEDD47 /* Widget.appex */,
@@ -413,9 +413,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B30338E22A30D06300CEDD47 /* App */ = {
+		B30338E22A30D06300CEDD47 /* KlangApp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B303390B2A30D06400CEDD47 /* Build configuration list for PBXNativeTarget "App" */;
+			buildConfigurationList = B303390B2A30D06400CEDD47 /* Build configuration list for PBXNativeTarget "KlangApp" */;
 			buildPhases = (
 				B30338DF2A30D06300CEDD47 /* Sources */,
 				B30338E02A30D06300CEDD47 /* Frameworks */,
@@ -428,14 +428,14 @@
 			dependencies = (
 				B303394A2A30D34D00CEDD47 /* PBXTargetDependency */,
 			);
-			name = App;
+			name = KlangApp;
 			packageProductDependencies = (
 				B32BF3592A393596005BFA59 /* Defaults */,
 				B3DD59DA2A6B046400314F4E /* SwiftUIReorderableForEach */,
 				B30FD83F2A6E628100990160 /* MCEmojiPicker */,
 			);
 			productName = WidgetSoundboard;
-			productReference = B30338E32A30D06300CEDD47 /* App.app */;
+			productReference = B30338E32A30D06300CEDD47 /* KlangApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 		B30338F62A30D06300CEDD47 /* Tests */ = {
@@ -538,7 +538,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B30338E22A30D06300CEDD47 /* App */,
+				B30338E22A30D06300CEDD47 /* KlangApp */,
 				B30339392A30D34D00CEDD47 /* Widget */,
 				B30338F62A30D06300CEDD47 /* Tests */,
 				B30339002A30D06400CEDD47 /* UITests */,
@@ -668,12 +668,12 @@
 /* Begin PBXTargetDependency section */
 		B30338F92A30D06300CEDD47 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = B30338E22A30D06300CEDD47 /* App */;
+			target = B30338E22A30D06300CEDD47 /* KlangApp */;
 			targetProxy = B30338F82A30D06300CEDD47 /* PBXContainerItemProxy */;
 		};
 		B30339032A30D06400CEDD47 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = B30338E22A30D06300CEDD47 /* App */;
+			target = B30338E22A30D06300CEDD47 /* KlangApp */;
 			targetProxy = B30339022A30D06400CEDD47 /* PBXContainerItemProxy */;
 		};
 		B303394A2A30D34D00CEDD47 /* PBXTargetDependency */ = {
@@ -1015,7 +1015,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B303390B2A30D06400CEDD47 /* Build configuration list for PBXNativeTarget "App" */ = {
+		B303390B2A30D06400CEDD47 /* Build configuration list for PBXNativeTarget "KlangApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B303390C2A30D06400CEDD47 /* Debug */,
