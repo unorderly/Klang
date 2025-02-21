@@ -16,10 +16,6 @@ struct ColorSizeKey: PreferenceKey {
     }
 }
 
-public struct ColorPalette {
-    public static let colors: [Color] = [.red, .blue, .green, .indigo, .mint, .orange, .pink, .purple, .teal, .yellow]
-}
-
 public struct ColorRow: View {
     @Binding public var selected: Color
 
