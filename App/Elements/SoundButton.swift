@@ -62,6 +62,7 @@ struct SoundButton: View {
                     Button(role: .destructive, action: {
                         board.sounds.removeAll(where: { $0 == self.sound.id })
                         Defaults[.boards].upsert(board, by: \.id)
+                        player?.stop()
                     }) {
                         Label("Remove From Board", systemImage: "trash")
                     }
@@ -72,6 +73,7 @@ struct SoundButton: View {
                         board.sounds.removeAll(where: { $0 == self.sound.id })
                         Defaults[.boards].upsert(board, by: \.id)
                     }
+                    player?.stop()
                 }) {
                     Label("Delete Sound", systemImage: "trash")
                 }
