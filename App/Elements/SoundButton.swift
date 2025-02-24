@@ -119,6 +119,7 @@ struct SoundButton: View {
 enum PlaybackError: Error {
     case failedToPlay
     case importFailed
+    case documentsDirectoryNotFound
 
     var errorDescription: String {
         switch self {
@@ -126,6 +127,8 @@ enum PlaybackError: Error {
             return "Failed to play sound."
         case .importFailed:
             return "Failed to import sound."
+        case .documentsDirectoryNotFound:
+            return "Documents directory not found."
         }
     }
 }

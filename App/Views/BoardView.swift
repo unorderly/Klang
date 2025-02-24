@@ -133,28 +133,35 @@ struct BoardView: View {
                     let gotAccess = url.startAccessingSecurityScopedResource()
                     if !gotAccess { return }
 
-                    let tempURL = FileManager.default.temporaryDirectory.appendingPathComponent(url.lastPathComponent)
-                    FileManager.default.deleteIfExists(at: tempURL)
+                    if let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+                        let destinationURL = documentsURL.appendingPathComponent(url.lastPathComponent)
 
-                    do {
-                        try FileManager.default.copyItem(at: url, to: tempURL)
+                        FileManager.default.deleteIfExists(at: destinationURL)
 
-                        let newSound = Sound(id: UUID(), title: "Imported Sound", symbol: "🚦", color: .orange, url: tempURL)
-                        Defaults[.sounds].upsert(newSound, by: \.id)
+                        do {
+                            try FileManager.default.copyItem(at: url, to: destinationURL)
 
-                        if let boardID = self.board?.id, var board = Defaults[.boards].first(where: { $0.id == boardID }) {
-                            board.sounds.append(newSound.id)
-                            Defaults[.boards].upsert(board, by: \.id)
+                            let newSound = Sound(id: UUID(), title: "Imported Sound", symbol: "🚦", color: .orange, url: destinationURL)
+                            Defaults[.sounds].upsert(newSound, by: \.id)
+
+                            if let boardID = self.board?.id, var board = Defaults[.boards].first(where: { $0.id == boardID }) {
+                                board.sounds.append(newSound.id)
+                                Defaults[.boards].upsert(board, by: \.id)
+                            }
+                        } catch {
+                            self.playbackError = .importFailed
+                            showErrorAlert = true
                         }
-                    } catch {
-                        self.playbackError = .importFailed
+
+                        url.stopAccessingSecurityScopedResource()
+                    } else {
+                        self.playbackError = .documentsDirectoryNotFound
                         showErrorAlert = true
                     }
-                    
-                    url.stopAccessingSecurityScopedResource()
                 }
-            case .failure(let error):
-                print(error.localizedDescription)
+            case .failure:
+                self.playbackError = .importFailed
+                showErrorAlert = true
             }
         }
         .if(self.boardID != Board.allID) { content in
