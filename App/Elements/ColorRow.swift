@@ -48,12 +48,7 @@ public struct ColorRow: View {
             ColorPicker("Color Picker",
                         selection: $selectedColor,
                         supportsOpacity: false)
-            .onChange(of: selectedColor) {
-                custom = selectedColor
-            }
-            .onAppear {
-                selectedColor = custom
-            }
+                .debounce(from: $selectedColor, to: $custom)
             .accessibilityAddTraits(!self.colors.contains(self.selected) ? .isSelected : [])
             .labelsHidden()
             .background(GeometryReader {
