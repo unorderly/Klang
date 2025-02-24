@@ -136,7 +136,7 @@ struct BoardView: View {
                 do {
                     try FileManager.default.copyItem(at: url, to: tempURL)
 
-                    let newSound = Sound(id: UUID(), title: "Imported Sound", symbol: "🚦", color: ColorPalette.colors.randomElement()!, url: tempURL)
+                    let newSound = Sound(id: UUID(), title: "Imported Sound", symbol: "🚦", color: Color.palette.randomElement()!, url: tempURL)
                     Defaults[.sounds].upsert(newSound, by: \.id)
 
                     if let boardID = self.board?.id, var board = Defaults[.boards].first(where: { $0.id == boardID }) {

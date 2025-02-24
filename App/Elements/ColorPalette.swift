@@ -7,6 +7,8 @@
 
 import SwiftUI
 
-public struct ColorPalette {
-    public static let colors: [Color] = [.red, .blue, .green, .indigo, .mint, .orange, .pink, .purple, .teal, .yellow]
+extension Color {
+    static var palette: [Color] {
+        [.red, .blue, .green, .indigo, .mint, .orange, .pink, .purple, .teal, .yellow]
+    }
 }

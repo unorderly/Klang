@@ -88,7 +88,7 @@ struct EditorView: View {
                             .font(.title3.weight(.semibold))
                     }
                     
-                    ColorRow(selected: $color, colors: ColorPalette.colors)
+                    ColorRow(selected: $color, colors: Color.palette)
                         .padding(6)
                 }
                 

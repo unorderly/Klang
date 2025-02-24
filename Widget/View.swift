@@ -31,7 +31,7 @@ struct SoundWidgetEmptyView: View {
                     HStack(spacing: 12) {
                         ForEach(Array(0..<(self.rows * widgetFamily.aspectRatio)), id: \.self) { _ in
                             ContainerRelativeShape()
-                                .foregroundStyle(ColorPalette.colors.randomElement()!)
+                                .foregroundStyle(Color.palette.randomElement()!)
                                 .opacity(0.3)
                         }
                     }

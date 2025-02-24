@@ -115,6 +115,6 @@ public struct ColorRow: View {
     }
 }
 #Preview {
-    ColorRow(selected: .constant(.red), colors: ColorPalette.colors)
+    ColorRow(selected: .constant(.red), colors: Color.palette)
         .padding()
 }
