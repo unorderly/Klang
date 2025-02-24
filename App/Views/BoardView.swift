@@ -86,7 +86,6 @@ struct BoardView: View {
                         }
                         Button(action: {
                             showImporter = true
-                            print("showImporter: \(showImporter)")
                         }) {
                             Label("Import Sound", systemImage: "square.and.arrow.down.fill")
                         }
