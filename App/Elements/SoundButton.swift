@@ -118,11 +118,14 @@ struct SoundButton: View {
 
 enum PlaybackError: Error {
     case failedToPlay
+    case importFailed
 
     var errorDescription: String {
         switch self {
         case .failedToPlay:
             return "Failed to play sound."
+        case .importFailed:
+            return "Failed to import sound."
         }
     }
 }

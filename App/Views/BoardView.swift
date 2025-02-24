@@ -20,7 +20,9 @@ struct BoardView: View {
 
     @State var showBoardEdit = false
     @State var showDeleteAlert = false
+    @State var showErrorAlert = false
     @State private var showImporter = false
+    @State private var playbackError: PlaybackError?
 
     @Environment(\.dismiss) var dismiss
 
@@ -145,7 +147,8 @@ struct BoardView: View {
                             Defaults[.boards].upsert(board, by: \.id)
                         }
                     } catch {
-                        print("Error moving file: \(error.localizedDescription)")
+                        self.playbackError = .importFailed
+                        showErrorAlert = true
                     }
                     
                     url.stopAccessingSecurityScopedResource()
@@ -169,6 +172,13 @@ struct BoardView: View {
                 }
             })
         }
+        .alert("There was an error",
+               isPresented: $showErrorAlert,
+               actions: {
+            Button("OK") { }
+        }, message: {
+            Text(self.playbackError?.errorDescription ?? "")
+        })
         .alert("Do you also want to delete the sounds in this board?",
                isPresented: $showDeleteAlert,
                actions: {
