@@ -24,23 +24,16 @@ enum IntentRunner {
         }
 
         guard let fileURL = intent.sound.file.fileURL, let newPlayer = try? AudioPlayer(url: fileURL) else {
-            let errorMessage = "There was a error in the Widget"
-            print(errorMessage)
-            DispatchQueue.main.async {
-                AudioErrorManager.errorManager.errorMessage = errorMessage
-                AudioErrorManager.errorManager.showWidgetError = true
-            }
+            AudioErrorManager.errorManager.reportError("There was a error in the Widget")
             return .result()
         }
-        print("Start playing \(intent.sound.title)")
 
+        activePlayer[soundID] = newPlayer
         print("Created sound for \(intent.sound.title)")
 
         if intent.isFullBlast && newPlayer.isOnSpeaker {
             await MPVolumeView.setVolume(1)
         }
-
-        activePlayer[soundID] = newPlayer
 
         do {
             print("Playing sound \(intent.sound.title)")
@@ -48,12 +41,7 @@ enum IntentRunner {
             try await newPlayer.playOnQueue()
             print("Sound \(intent.sound.title) stopped")
         } catch {
-            let errorMessage = "There was a error playing sound in the Widget"
-            print(errorMessage)
-            DispatchQueue.main.async {
-                AudioErrorManager.errorManager.errorMessage = errorMessage
-                AudioErrorManager.errorManager.showWidgetError = true
-            }
+            AudioErrorManager.errorManager.reportError("There was a error playing sound in the Widget")
         }
         return .result()
     }

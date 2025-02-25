@@ -181,6 +181,13 @@ class AudioErrorManager: ObservableObject {
     static let errorManager = AudioErrorManager()
     @Published var errorMessage: String?
     @Published var showWidgetError: Bool = false
+
+    func reportError(_ message: String) {
+        DispatchQueue.main.async {
+            self.errorMessage = message
+            self.showWidgetError = true
+        }
+    }
 }
 
 #Preview {
