@@ -24,7 +24,12 @@ enum IntentRunner {
         }
 
         guard let fileURL = intent.sound.file.fileURL, let newPlayer = try? AudioPlayer(url: fileURL) else {
-            print("Failed to create player for \(intent.sound.title)")
+            let errorMessage = "There was a error in the Widget"
+            print(errorMessage)
+            DispatchQueue.main.async {
+                AudioErrorManager.errorManager.errorMessage = errorMessage
+                AudioErrorManager.errorManager.showWidgetError = true
+            }
             return .result()
         }
         print("Start playing \(intent.sound.title)")
@@ -39,13 +44,16 @@ enum IntentRunner {
 
         do {
             print("Playing sound \(intent.sound.title)")
+            defer { activePlayer[soundID] = nil }
             try await newPlayer.playOnQueue()
             print("Sound \(intent.sound.title) stopped")
-
-            activePlayer[intent.sound.id] = nil
         } catch {
-            print("Playing Sound failed error:", error.localizedDescription)
-            activePlayer[intent.sound.id] = nil
+            let errorMessage = "There was a error playing sound in the Widget"
+            print(errorMessage)
+            DispatchQueue.main.async {
+                AudioErrorManager.errorManager.errorMessage = errorMessage
+                AudioErrorManager.errorManager.showWidgetError = true
+            }
         }
         return .result()
     }
