@@ -125,6 +125,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B30338E32A30D06300CEDD47 /* Klang.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Klang.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3668524A2D68837100082787 /* ColorPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
 		36F4FE492D6C8E7700018421 /* DebounceBinding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebounceBinding.swift; sourceTree = "<group>"; };
 		B30338E32A30D06300CEDD47 /* App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = App.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -240,7 +241,7 @@
 		B30338E42A30D06300CEDD47 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B30338E32A30D06300CEDD47 /* App.app */,
+				B30338E32A30D06300CEDD47 /* Klang.app */,
 				B30338F72A30D06300CEDD47 /* Tests.xctest */,
 				B30339012A30D06400CEDD47 /* UITests.xctest */,
 				B303393A2A30D34D00CEDD47 /* Widget.appex */,
@@ -442,7 +443,7 @@
 				B30FD83F2A6E628100990160 /* MCEmojiPicker */,
 			);
 			productName = WidgetSoundboard;
-			productReference = B30338E32A30D06300CEDD47 /* App.app */;
+			productReference = B30338E32A30D06300CEDD47 /* Klang.app */;
 			productType = "com.apple.product-type.application";
 		};
 		B30338F62A30D06300CEDD47 /* Tests */ = {
@@ -844,7 +845,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.unorderly.klang;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Klang;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -881,7 +882,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.unorderly.klang;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Klang;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
