@@ -12,10 +12,6 @@ import Defaults
 struct SoundWidgetEmptyView: View {
     @Environment(\.widgetFamily) var widgetFamily
 
-    var colors: [Color] {
-        [.red, .blue, .green, .indigo, .mint, .orange, .pink, .purple, .teal, .yellow]
-    }
-
     var rows: Int {
         switch widgetFamily {
         case .accessoryCircular, .accessoryRectangular:
@@ -35,7 +31,7 @@ struct SoundWidgetEmptyView: View {
                     HStack(spacing: 12) {
                         ForEach(Array(0..<(self.rows * widgetFamily.aspectRatio)), id: \.self) { _ in
                             ContainerRelativeShape()
-                                .foregroundStyle(self.colors.randomElement()!)
+                                .foregroundStyle(Color.palette.randomElement()!)
                                 .opacity(0.3)
                         }
                     }

@@ -19,7 +19,6 @@ struct EditorView: View {
     @State var isImporting: Bool = false
     @State var isEmojiPickerPresent: Bool = false
     
-    
     @State var id: UUID = .init()
     
     @State var isExisting = false
@@ -64,11 +63,7 @@ struct EditorView: View {
                   isExisting: true,
                   boardID: boardID)
     }
-    
-    var presetColors: [Color] {
-        [.red, .blue, .green, .indigo, .mint, .orange, .pink, .purple, .teal, .yellow]
-    }
-    
+
     var body: some View {
         NavigationStack {
             Form {
@@ -93,11 +88,9 @@ struct EditorView: View {
                             .font(.title3.weight(.semibold))
                     }
                     
-                    ColorRow(selected: $color, colors: self.presetColors)
+                    ColorRow(selected: $color, colors: Color.palette)
                         .padding(6)
-                    
                 }
-                
                 
                 Section {
                     if let url = self.file {

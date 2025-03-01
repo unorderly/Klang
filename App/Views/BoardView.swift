@@ -20,6 +20,9 @@ struct BoardView: View {
 
     @State var showBoardEdit = false
     @State var showDeleteAlert = false
+    @State var showErrorAlert = false
+    @State private var showImporter = false
+    @State private var playbackError: PlaybackError?
 
     @Environment(\.dismiss) var dismiss
 
@@ -83,6 +86,11 @@ struct BoardView: View {
                         }) {
                             Label("Add Existing Sound", systemImage: "doc.on.doc.fill")
                         }
+                        Button(action: {
+                            showImporter = true
+                        }) {
+                            Label("Import Sound", systemImage: "square.and.arrow.down.fill")
+                        }
                     }, label: {
                         Label("Add Sound", systemImage: "plus")
                     })
@@ -114,6 +122,48 @@ struct BoardView: View {
                 self.dismiss()
             }
         }
+        .fileImporter(
+            isPresented: $showImporter,
+            allowedContentTypes: [.mp3],
+            allowsMultipleSelection: true
+        ) { result in
+            switch result {
+            case .success(let urls):
+                for url in urls {
+                    let gotAccess = url.startAccessingSecurityScopedResource()
+                    if !gotAccess { return }
+
+                    if let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+                        let destinationURL = documentsURL.appendingPathComponent(url.lastPathComponent)
+
+                        FileManager.default.deleteIfExists(at: destinationURL)
+
+                        do {
+                            try FileManager.default.copyItem(at: url, to: destinationURL)
+
+                            let newSound = Sound(id: UUID(), title: "Imported Sound", symbol: "🚦", color: Color.palette.randomElement()!, url: destinationURL)
+                            Defaults[.sounds].upsert(newSound, by: \.id)
+
+                            if let boardID = self.board?.id, var board = Defaults[.boards].first(where: { $0.id == boardID }) {
+                                board.sounds.append(newSound.id)
+                                Defaults[.boards].upsert(board, by: \.id)
+                            }
+                        } catch {
+                            self.playbackError = .importFailed
+                            showErrorAlert = true
+                        }
+
+                        url.stopAccessingSecurityScopedResource()
+                    } else {
+                        self.playbackError = .documentsDirectoryNotFound
+                        showErrorAlert = true
+                    }
+                }
+            case .failure:
+                self.playbackError = .importFailed
+                showErrorAlert = true
+            }
+        }
         .if(self.boardID != Board.allID) { content in
             content.toolbarTitleMenu(content: {
                 Button(action: {
@@ -129,6 +179,13 @@ struct BoardView: View {
                 }
             })
         }
+        .alert("There was an error",
+               isPresented: $showErrorAlert,
+               actions: {
+            Button("OK") { }
+        }, message: {
+            Text(self.playbackError?.errorDescription ?? "")
+        })
         .alert("Do you also want to delete the sounds in this board?",
                isPresented: $showDeleteAlert,
                actions: {
@@ -155,6 +212,13 @@ struct BoardView: View {
     }
 }
 
+extension FileManager {
+    func deleteIfExists(at url: URL) {
+        if self.fileExists(atPath: url.path) {
+            try? self.removeItem(at: url)
+        }
+    }
+}
 
 #Preview {
     NavigationStack {

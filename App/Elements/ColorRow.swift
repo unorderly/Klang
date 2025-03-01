@@ -16,8 +16,6 @@ struct ColorSizeKey: PreferenceKey {
     }
 }
 
-
-
 public struct ColorRow: View {
     @Binding public var selected: Color
 
@@ -31,6 +29,7 @@ public struct ColorRow: View {
     @State private var size: CGSize = .init(width: 22, height: 22)
 
     @State private var custom: Color = .clear
+    @State private var selectedColor: Color = .clear
 
     public var body: some View {
         HStack(spacing: 0) {
@@ -46,10 +45,10 @@ public struct ColorRow: View {
                 }
             }
 
-           
             ColorPicker("Color Picker",
-                        selection: $custom,
+                        selection: $selectedColor,
                         supportsOpacity: false)
+                .debounce(from: $selectedColor, to: $custom)
             .accessibilityAddTraits(!self.colors.contains(self.selected) ? .isSelected : [])
             .labelsHidden()
             .background(GeometryReader {
@@ -111,6 +110,6 @@ public struct ColorRow: View {
     }
 }
 #Preview {
-    ColorRow(selected: .constant(.red), colors: [.red, .blue, .green, .indigo, .mint, .orange, .pink, .purple, .teal, .yellow])
+    ColorRow(selected: .constant(.red), colors: Color.palette)
         .padding()
 }

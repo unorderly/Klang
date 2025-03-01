@@ -19,17 +19,28 @@ struct SoundButton: View {
     @ScaledMetric(relativeTo: .title2) private var itemSize: CGFloat = 100
 
     @State private var player: AudioPlayer?
+    @State private var showErrorAlert: Bool = false
+    @State private var playbackError: PlaybackError?
 
     var body: some View {
         Button(action: {
-            let audioPlayer = try! self.player ?? AudioPlayer(url: sound.url)
-            self.player = audioPlayer
-            if audioPlayer.player.isPlaying {
-                audioPlayer.stop()
-            } else {
-                Task {
-                    try await audioPlayer.playOnQueue()
+            do {
+                if self.player == nil {
+                    self.player = try AudioPlayer(url: sound.url)
                 }
+
+                guard let audioPlayer = self.player else { return }
+
+                if audioPlayer.isPlaying {
+                    audioPlayer.stop()
+                } else {
+                    Task {
+                        try await audioPlayer.playOnQueue()
+                    }
+                }
+            } catch {
+                showErrorAlert = true
+                self.playbackError = .failedToPlay
             }
         }) {
             VStack(spacing: 8) {
@@ -95,10 +106,32 @@ struct SoundButton: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
             .padding(12)
         }
+        .alert("There was an Error", isPresented: $showErrorAlert, actions: {
+            Button("OK") { }
+        }, message: {
+            Text(self.playbackError?.errorDescription ?? "")
+        })
         .buttonBorderShape(.roundedRectangle)
         .buttonStyle(.bordered)
         .tint(sound.color)
         .animation(.default, value: self.player?.isPlaying ?? false)
+    }
+}
+
+enum PlaybackError: Error {
+    case failedToPlay
+    case importFailed
+    case documentsDirectoryNotFound
+
+    var errorDescription: String {
+        switch self {
+        case .failedToPlay:
+            return "Failed to play sound."
+        case .importFailed:
+            return "Failed to import sound."
+        case .documentsDirectoryNotFound:
+            return "Documents directory not found."
+        }
     }
 }
 

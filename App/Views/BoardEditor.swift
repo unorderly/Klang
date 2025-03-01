@@ -47,11 +47,6 @@ struct BoardEditor: View {
                   isExisting: true)
     }
 
-    var presetColors: [Color] {
-        [.red, .blue, .green, .indigo, .mint, .orange, .pink, .purple, .teal, .yellow]
-    }
-
-
     var body: some View {
         NavigationStack {
             Form {
@@ -76,7 +71,7 @@ struct BoardEditor: View {
                             .font(.title3.weight(.semibold))
                     }
 
-                    ColorRow(selected: $color, colors: self.presetColors)
+                    ColorRow(selected: $color, colors: Color.palette)
                         .padding(6)
 
                 }
