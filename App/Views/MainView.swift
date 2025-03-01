@@ -39,6 +39,8 @@ struct MainView: View {
 
     @ScaledMetric(relativeTo: .headline) var minimumWidth: CGFloat = 130
 
+    @StateObject private var errorManager = AudioErrorManager.errorManager
+
     var body: some View {
         NavigationSplitView(preferredCompactColumn: $preferredCompactColumn, sidebar: {
             ScrollView(.vertical) {
@@ -144,7 +146,11 @@ struct MainView: View {
                 GalleryBoard.animals.save()
             }
         }
-
+        .alert("Error", isPresented: $errorManager.showWidgetError) {
+            Button("OK") { }
+        } message: {
+            Text(errorManager.errorMessage ?? "Unknown error")
+        }
     }
 }
 
@@ -171,6 +177,18 @@ extension Array {
     }
 }
 
+class AudioErrorManager: ObservableObject {
+    static let errorManager = AudioErrorManager()
+    @Published var errorMessage: String?
+    @Published var showWidgetError: Bool = false
+
+    func reportError(_ message: String) {
+        DispatchQueue.main.async {
+            self.errorMessage = message
+            self.showWidgetError = true
+        }
+    }
+}
 
 #Preview {
     MainView()
