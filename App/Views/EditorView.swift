@@ -244,7 +244,7 @@ struct EditorView: View {
                                             return
                                         }
                                         let newPath = FileManager.default
-                                            .containerURL(forSecurityApplicationGroupIdentifier: "group.io.unorderly.soundboard")!
+                                            .containerURL
                                             .appending(component: "\(self.id.uuidString)_\(UUID().uuidString)")
                                             .appendingPathExtension(url.pathExtension)
                                         do {
@@ -362,7 +362,7 @@ struct VideoToAudio: Transferable {
             throw "No export session"
         }
 
-        let tempURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appending(path: UUID().uuidString).appendingPathExtension("m4a")
+        let tempURL = FileManager.default.containerURL.appending(path: UUID().uuidString).appendingPathExtension("m4a")
         exportSession.outputURL = tempURL
         exportSession.outputFileType = .m4a
         await exportSession.export()
@@ -374,7 +374,7 @@ struct VideoToAudio: Transferable {
     }
 }
 
-extension String: Error {
+extension String: @retroactive Error {
 
 }
 #Preview("Edit") {

@@ -64,29 +64,36 @@ struct SoundButton: View {
         }
         .overlay {
             Menu(content: {
-                Button(action: {
-                    self.isEditing = true
-                }) {
-                    Label("Edit Sound", systemImage: "pencil")
+                Section {
+                    Button(action: {
+                        self.isEditing = true
+                    }) {
+                        Label("Edit Sound", systemImage: "pencil")
+                    }
+
+                    exportButton
                 }
-                if var board = Defaults[.boards].first(where: { $0.id == self.boardID }) {
+
+                Section {
+                    if var board = Defaults[.boards].first(where: { $0.id == self.boardID }) {
+                        Button(role: .destructive, action: {
+                            board.sounds.removeAll(where: { $0 == self.sound.id })
+                            Defaults[.boards].upsert(board, by: \.id)
+                            player?.stop()
+                        }) {
+                            Label("Remove From Board", systemImage: "trash")
+                        }
+                    }
                     Button(role: .destructive, action: {
-                        board.sounds.removeAll(where: { $0 == self.sound.id })
-                        Defaults[.boards].upsert(board, by: \.id)
+                        Defaults[.sounds].removeAll(where: { $0.id == self.sound.id })
+                        for var board in Defaults[.boards] where board.sounds.contains(self.sound.id) {
+                            board.sounds.removeAll(where: { $0 == self.sound.id })
+                            Defaults[.boards].upsert(board, by: \.id)
+                        }
                         player?.stop()
                     }) {
-                        Label("Remove From Board", systemImage: "trash")
+                        Label("Delete Sound", systemImage: "trash")
                     }
-                }
-                Button(role: .destructive, action: {
-                    Defaults[.sounds].removeAll(where: { $0.id == self.sound.id })
-                    for var board in Defaults[.boards] where board.sounds.contains(self.sound.id) {
-                        board.sounds.removeAll(where: { $0 == self.sound.id })
-                        Defaults[.boards].upsert(board, by: \.id)
-                    }
-                    player?.stop()
-                }) {
-                    Label("Delete Sound", systemImage: "trash")
                 }
             }, label: {
                 Image(systemName: self.player?.isPlaying ?? false ? "speaker.wave.2.circle.fill" : "ellipsis.circle.fill")
@@ -116,12 +123,22 @@ struct SoundButton: View {
         .tint(sound.color.ensureContrast)
         .animation(.default, value: self.player?.isPlaying ?? false)
     }
+
+    var exportButton: some View {
+        ShareLink(item: sound,
+                  preview: SharePreview(
+                    "\(sound.symbol) \(sound.title)",
+                    image: Image(systemName: "music.quarternote.3")
+                  )) {
+            Label("Share Sound", systemImage: "square.and.arrow.up")
+        }
+    }
 }
 
 enum PlaybackError: Error {
     case failedToPlay
     case importFailed
-    case documentsDirectoryNotFound
+    case exportFailed
 
     var errorDescription: String {
         switch self {
@@ -129,8 +146,8 @@ enum PlaybackError: Error {
             return "Failed to play sound."
         case .importFailed:
             return "Failed to import sound."
-        case .documentsDirectoryNotFound:
-            return "Documents directory not found."
+        case .exportFailed:
+            return "Failed to export sounds."
         }
     }
 }

@@ -74,7 +74,7 @@ struct Board: Codable, Defaults.Serializable, Identifiable, Hashable {
     }
 }
 
-struct Sound: Codable, Defaults.Serializable, Identifiable, Hashable {
+struct Sound: Codable, Defaults.Serializable, Identifiable, Hashable, Transferable {
     var id: UUID
     var title: String
     var symbol: String
@@ -101,6 +101,34 @@ struct Sound: Codable, Defaults.Serializable, Identifiable, Hashable {
         var object = self
         object[keyPath: keyPath] = value
         return object
+    }
+    
+    // MARK: - Transferable
+    
+    static var transferRepresentation: some TransferRepresentation {
+        DataRepresentation(contentType: .mp3) { sound in
+            try Data(contentsOf: sound.url)
+        } importing: { data in
+            let fileName = "\(UUID().uuidString).mp3"
+            let documentsURL = FileManager.default.containerURL
+            let destinationURL = documentsURL.appendingPathComponent(fileName)
+            
+            // Delete any existing file with same name
+            FileManager.default.deleteIfExists(at: destinationURL)
+            
+            try data.write(to: destinationURL)
+            
+            return Sound(id: UUID(),
+                         title: destinationURL.lastPathComponent,
+                         symbol: "🚦",
+                         color: Color.palette.randomElement()!,
+                         url: destinationURL
+            )
+
+        }
+        .suggestedFileName { sound in
+            "\(sound.symbol) \(sound.title).mp3"
+        }
     }
 
     static let preview: [Sound] = [
