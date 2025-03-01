@@ -20,7 +20,9 @@ struct BoardView: View {
 
     @State var showBoardEdit = false
     @State var showDeleteAlert = false
+    @State var showErrorAlert = false
     @State private var showImporter = false
+    @State private var playbackError: PlaybackError?
 
     @Environment(\.dismiss) var dismiss
 
@@ -86,7 +88,6 @@ struct BoardView: View {
                         }
                         Button(action: {
                             showImporter = true
-                            print("showImporter: \(showImporter)")
                         }) {
                             Label("Import Sound", systemImage: "square.and.arrow.down.fill")
                         }
@@ -123,33 +124,44 @@ struct BoardView: View {
         }
         .fileImporter(
             isPresented: $showImporter,
-            allowedContentTypes: [.mp3]
+            allowedContentTypes: [.mp3],
+            allowsMultipleSelection: true
         ) { result in
             switch result {
-            case .success(let url):
-                let gotAccess = url.startAccessingSecurityScopedResource()
-                if !gotAccess { return }
+            case .success(let urls):
+                for url in urls {
+                    let gotAccess = url.startAccessingSecurityScopedResource()
+                    if !gotAccess { return }
 
-                let tempURL = FileManager.default.temporaryDirectory.appendingPathComponent(url.lastPathComponent)
-                FileManager.default.deleteIfExists(at: tempURL)
+                    if let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+                        let destinationURL = documentsURL.appendingPathComponent(url.lastPathComponent)
 
-                do {
-                    try FileManager.default.copyItem(at: url, to: tempURL)
+                        FileManager.default.deleteIfExists(at: destinationURL)
 
-                    let newSound = Sound(id: UUID(), title: "Imported Sound", symbol: "🚦", color: Color.palette.randomElement()!, url: tempURL)
-                    Defaults[.sounds].upsert(newSound, by: \.id)
+                        do {
+                            try FileManager.default.copyItem(at: url, to: destinationURL)
 
-                    if let boardID = self.board?.id, var board = Defaults[.boards].first(where: { $0.id == boardID }) {
-                        board.sounds.append(newSound.id)
-                        Defaults[.boards].upsert(board, by: \.id)
+                            let newSound = Sound(id: UUID(), title: "Imported Sound", symbol: "🚦", color: Color.palette.randomElement()!, url: destinationURL)
+                            Defaults[.sounds].upsert(newSound, by: \.id)
+
+                            if let boardID = self.board?.id, var board = Defaults[.boards].first(where: { $0.id == boardID }) {
+                                board.sounds.append(newSound.id)
+                                Defaults[.boards].upsert(board, by: \.id)
+                            }
+                        } catch {
+                            self.playbackError = .importFailed
+                            showErrorAlert = true
+                        }
+
+                        url.stopAccessingSecurityScopedResource()
+                    } else {
+                        self.playbackError = .documentsDirectoryNotFound
+                        showErrorAlert = true
                     }
-                } catch {
-                    print("Error moving file: \(error.localizedDescription)")
                 }
-                
-                url.stopAccessingSecurityScopedResource()
-            case .failure(let error):
-                print(error.localizedDescription)
+            case .failure:
+                self.playbackError = .importFailed
+                showErrorAlert = true
             }
         }
         .if(self.boardID != Board.allID) { content in
@@ -167,6 +179,13 @@ struct BoardView: View {
                 }
             })
         }
+        .alert("There was an error",
+               isPresented: $showErrorAlert,
+               actions: {
+            Button("OK") { }
+        }, message: {
+            Text(self.playbackError?.errorDescription ?? "")
+        })
         .alert("Do you also want to delete the sounds in this board?",
                isPresented: $showDeleteAlert,
                actions: {

@@ -19,6 +19,8 @@ struct SoundButton: View {
     @ScaledMetric(relativeTo: .title2) private var itemSize: CGFloat = 100
 
     @State private var player: AudioPlayer?
+    @State private var showErrorAlert: Bool = false
+    @State private var playbackError: PlaybackError?
 
     var body: some View {
         Button(action: {
@@ -37,7 +39,8 @@ struct SoundButton: View {
                     }
                 }
             } catch {
-                print("Error with AudioPlayer: \(error.localizedDescription)")
+                showErrorAlert = true
+                self.playbackError = .failedToPlay
             }
         }) {
             VStack(spacing: 8) {
@@ -101,10 +104,32 @@ struct SoundButton: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
             .padding(12)
         }
+        .alert("There was an Error", isPresented: $showErrorAlert, actions: {
+            Button("OK") { }
+        }, message: {
+            Text(self.playbackError?.errorDescription ?? "")
+        })
         .buttonBorderShape(.roundedRectangle)
         .buttonStyle(.bordered)
         .tint(sound.color)
         .animation(.default, value: self.player?.isPlaying ?? false)
+    }
+}
+
+enum PlaybackError: Error {
+    case failedToPlay
+    case importFailed
+    case documentsDirectoryNotFound
+
+    var errorDescription: String {
+        switch self {
+        case .failedToPlay:
+            return "Failed to play sound."
+        case .importFailed:
+            return "Failed to import sound."
+        case .documentsDirectoryNotFound:
+            return "Documents directory not found."
+        }
     }
 }
 
