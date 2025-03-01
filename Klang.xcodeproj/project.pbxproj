@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3668524B2D68837300082787 /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3668524A2D68837100082787 /* ColorPalette.swift */; };
+		3668524C2D6883CC00082787 /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3668524A2D68837100082787 /* ColorPalette.swift */; };
+		36F4FE4A2D6C8E7E00018421 /* DebounceBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F4FE492D6C8E7700018421 /* DebounceBinding.swift */; };
 		B30338E72A30D06300CEDD47 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30338E62A30D06300CEDD47 /* App.swift */; };
 		B30338E92A30D06300CEDD47 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B30338E82A30D06300CEDD47 /* MainView.swift */; };
 		B30338EB2A30D06300CEDD47 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B30338EA2A30D06300CEDD47 /* Assets.xcassets */; };
@@ -122,6 +125,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		3668524A2D68837100082787 /* ColorPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
+		36F4FE492D6C8E7700018421 /* DebounceBinding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebounceBinding.swift; sourceTree = "<group>"; };
 		B30338E32A30D06300CEDD47 /* App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = App.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B30338E62A30D06300CEDD47 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		B30338E82A30D06300CEDD47 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -325,6 +330,7 @@
 		B321932E2A3FACAD0050B011 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				36F4FE492D6C8E7700018421 /* DebounceBinding.swift */,
 				B3D6E0392AA0CCA60078A6A9 /* FadeBackground.swift */,
 				B3D270F62A92088D007D05A9 /* Fuse.swift */,
 				B34C78302A8F8463009A8BAA /* Modify.swift */,
@@ -379,6 +385,7 @@
 		B3D3BE132A9B413700D7C077 /* Elements */ = {
 			isa = PBXGroup;
 			children = (
+				3668524A2D68837100082787 /* ColorPalette.swift */,
 				B34C78382A8FB262009A8BAA /* BoardButton.swift */,
 				B34C78362A8FB1CF009A8BAA /* SoundButton.swift */,
 				B30FD8412A6E637B00990160 /* RecordingButton.swift */,
@@ -608,9 +615,11 @@
 				B30FD8482A6E8AB100990160 /* TempiFFT.swift in Sources */,
 				B34C78392A8FB262009A8BAA /* BoardButton.swift in Sources */,
 				B32193302A3FAD0C0050B011 /* EditorView.swift in Sources */,
+				3668524B2D68837300082787 /* ColorPalette.swift in Sources */,
 				B3D6E03A2AA0CCA60078A6A9 /* FadeBackground.swift in Sources */,
 				B3DD59DD2A6B070500314F4E /* AudioRecorder.swift in Sources */,
 				B34C783B2A8FBE10009A8BAA /* SoundEntity.swift in Sources */,
+				36F4FE4A2D6C8E7E00018421 /* DebounceBinding.swift in Sources */,
 				B3A8FD442A71000500357001 /* AudioPlayer.swift in Sources */,
 				B30FD8442A6E7DEB00990160 /* WaveformView.swift in Sources */,
 				B34C78332A8FAE09009A8BAA /* BoardView.swift in Sources */,
@@ -651,6 +660,7 @@
 				B34040282A398F1800A1D23E /* Color.swift in Sources */,
 				B303394F2A30D39C00CEDD47 /* Intent.swift in Sources */,
 				B32BF3452A38E7D3005BFA59 /* Alignment.swift in Sources */,
+				3668524C2D6883CC00082787 /* ColorPalette.swift in Sources */,
 				B3EF669F2AAA2484008FF8A6 /* IntentRunner.swift in Sources */,
 				B30339452A30D34D00CEDD47 /* ConfigurationIntent.swift in Sources */,
 				B32BF35F2A39891F005BFA59 /* AsyncButton.swift in Sources */,
