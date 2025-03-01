@@ -54,3 +54,27 @@ struct BoardWidgetConfigIntent: WidgetConfigurationIntent {
         self.init(isFullBlast: false)
     }
 }
+
+@available(iOS 18, *)
+struct SingleSoundWidgetConfigIntent: ControlConfigurationIntent {
+    static var title: LocalizedStringResource = "Soundboard Widget Configration"
+    static var description = IntentDescription("This is used to configure the widget.")
+
+    @Parameter(title: "Sound",
+               description: "Pick the sound for this control.")
+    var sound: SoundEntity?
+
+    @Parameter(title: "Full Blast Mode",
+               description: "If enabled, the sound will set to full volumn before playing the sound. To protect your ears, this only happens when no headphones/speakers are connected (hopefully).",
+               default: false)
+    var isFullBlast: Bool
+
+    init(sound: SoundEntity? = SoundEntity.default.first, isFullBlast: Bool) {
+        self.sound = sound
+        self.isFullBlast = isFullBlast
+    }
+
+    init() {
+        self.init(isFullBlast: false)
+    }
+}

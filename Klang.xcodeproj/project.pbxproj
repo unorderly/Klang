@@ -63,6 +63,7 @@
 		B3D3BE182A9B420100D7C077 /* Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D3BE172A9B420100D7C077 /* Widget.swift */; };
 		B3D3D9662D732FC7004D91A4 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D3D9652D732FC7004D91A4 /* URL.swift */; };
 		B3D3D9672D732FC7004D91A4 /* URL.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D3D9652D732FC7004D91A4 /* URL.swift */; };
+		B3D3D9692D7340BF004D91A4 /* Control.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D3D9682D7340BF004D91A4 /* Control.swift */; };
 		B3D6E0092AA09A8C0078A6A9 /* GalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D6E0082AA09A8C0078A6A9 /* GalleryView.swift */; };
 		B3D6E03A2AA0CCA60078A6A9 /* FadeBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3D6E0392AA0CCA60078A6A9 /* FadeBackground.swift */; };
 		B3D6E03C2AA0E34B0078A6A9 /* Gallery in Resources */ = {isa = PBXBuildFile; fileRef = B3D6E03B2AA0E34B0078A6A9 /* Gallery */; };
@@ -176,6 +177,7 @@
 		B3D3BE152A9B416400D7C077 /* Timeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timeline.swift; sourceTree = "<group>"; };
 		B3D3BE172A9B420100D7C077 /* Widget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Widget.swift; sourceTree = "<group>"; };
 		B3D3D9652D732FC7004D91A4 /* URL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URL.swift; sourceTree = "<group>"; };
+		B3D3D9682D7340BF004D91A4 /* Control.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Control.swift; sourceTree = "<group>"; };
 		B3D6E0082AA09A8C0078A6A9 /* GalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryView.swift; sourceTree = "<group>"; };
 		B3D6E0392AA0CCA60078A6A9 /* FadeBackground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FadeBackground.swift; sourceTree = "<group>"; };
 		B3D6E03B2AA0E34B0078A6A9 /* Gallery */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Gallery; sourceTree = "<group>"; };
@@ -312,6 +314,7 @@
 			children = (
 				B303393E2A30D34D00CEDD47 /* WidgetBundle.swift */,
 				B3D3BE172A9B420100D7C077 /* Widget.swift */,
+				B3D3D9682D7340BF004D91A4 /* Control.swift */,
 				B30339422A30D34D00CEDD47 /* View.swift */,
 				B3D3BE152A9B416400D7C077 /* Timeline.swift */,
 				B30339442A30D34D00CEDD47 /* ConfigurationIntent.swift */,
@@ -668,6 +671,7 @@
 				3668524C2D6883CC00082787 /* ColorPalette.swift in Sources */,
 				B3EF669F2AAA2484008FF8A6 /* IntentRunner.swift in Sources */,
 				B3D3D9672D732FC7004D91A4 /* URL.swift in Sources */,
+				B3D3D9692D7340BF004D91A4 /* Control.swift in Sources */,
 				B30339452A30D34D00CEDD47 /* ConfigurationIntent.swift in Sources */,
 				B32BF35F2A39891F005BFA59 /* AsyncButton.swift in Sources */,
 				B34C783C2A8FBE26009A8BAA /* SoundEntity.swift in Sources */,

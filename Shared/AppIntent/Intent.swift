@@ -19,12 +19,12 @@ struct SoundIntent: AudioPlaybackIntent {
     static var description = IntentDescription("Plays a sound")
     
     @Parameter(title: "Sound")
-    var sound: SoundEntity
-    
+    var sound: SoundEntity?
+
     @Parameter(title: "Full Blast Mode")
     var isFullBlast: Bool
     
-    init(sound: SoundEntity, isFullBlast: Bool) {
+    init(sound: SoundEntity?, isFullBlast: Bool) {
         self.sound = sound
         self.isFullBlast = isFullBlast
     }
