@@ -22,7 +22,7 @@ struct DebounceBindingModifier<Value: Equatable>: ViewModifier {
 
     func body(content: Content) -> some View {
         content
-            .onChange(of: self.local, perform: { value in
+            .onChange(of: self.local, { _, value in
                 self.localPublisher.send(value)
             })
             .onReceive(self.localPublisher

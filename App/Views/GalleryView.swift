@@ -196,7 +196,7 @@ struct GallerySoundButton: View {
         }
         .buttonBorderShape(.roundedRectangle)
         .buttonStyle(.bordered)
-        .tint(sound.color)
+        .tint(sound.color.ensureContrast)
         .animation(.default, value: self.player?.isPlaying ?? false)
     }
 }
@@ -287,7 +287,7 @@ struct GalleryBoardButton: View {
         }, message: {
             Text("Would you like to save it again?")
         })
-        .tint(board.color)
+        .tint(board.color.ensureContrast)
     }
 }
 

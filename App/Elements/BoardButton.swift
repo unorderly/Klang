@@ -50,7 +50,7 @@ struct BoardButton: View {
                 content.buttonStyle(.bordered)
             }
         })
-        .tint(board.color)
+        .tint(board.color.ensureContrast)
     }
 }
 

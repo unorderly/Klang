@@ -113,7 +113,7 @@ struct SoundButton: View {
         })
         .buttonBorderShape(.roundedRectangle)
         .buttonStyle(.bordered)
-        .tint(sound.color)
+        .tint(sound.color.ensureContrast)
         .animation(.default, value: self.player?.isPlaying ?? false)
     }
 }

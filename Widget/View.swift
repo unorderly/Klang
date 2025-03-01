@@ -150,7 +150,7 @@ struct SoundWidgetEntryView<Entry: SoundboardTimelineEntry>: View {
                                                     }
                                                     .buttonBorderShape(.roundedRectangle)
                                                     .buttonStyle(.bordered)
-                                                    .tint(Color(hex: sound.color) ?? .red)
+                                                    .tint(Color(hex: sound.color)?.ensureContrast ?? .red)
                                                 case .placeholder:
                                                     Color.clear
                                                 }

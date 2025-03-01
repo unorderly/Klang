@@ -61,7 +61,7 @@ struct BoardEditor: View {
                         }
                         .buttonBorderShape(.circle)
                         .buttonStyle(.bordered)
-                        .tint(self.color)
+                        .tint(self.color.ensureContrast)
                         .emojiPicker(
                             isPresented: $isEmojiPickerPresent,
                             selectedEmoji: $symbol

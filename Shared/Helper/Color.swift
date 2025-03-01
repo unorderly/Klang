@@ -78,3 +78,14 @@ extension Color {
     }
 
 }
+
+extension Color {
+    /// Fixes: https://github.com/unorderly/Klang/issues/2
+    var ensureContrast: Color {
+        if self == .black || self == .white {
+            return .primary
+        } else {
+            return self
+        }
+    }
+}
